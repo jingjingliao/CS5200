@@ -1,0 +1,256 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(XML)
+xmlfn <- "pubmed-tfm-xml/sampleData.xml"
+xmlDOM <- xmlParse(xmlfn, validate=T)
+root <- xmlRoot(xmlDOM)
+root
+```
+
+```{r}
+Articles.df <- data.frame (
+                            ArticleId = integer(),
+                            JournalId = integer(),
+                            Language = character(),
+                            ArticleTitle = character(),
+                            stringsAsFactors = F
+                          )
+
+
+Authors.df <- data.frame (
+                          AuthorId = integer(),
+                          ArticleId = integer(),
+                          LastName = character(),
+                          ForeName = character(),
+                          Initials = character(),
+                          Affiliation = character(),
+                          SuffixId = integer(),
+                          CollectiveId = integer(),
+                          stringsAsFactors = F
+                        )
+
+Suffix.df <- data.frame (
+                          SuffixId = integer(),
+                          SuffixName = character(),
+                          stringsAsFactors = F
+                        )
+
+Collective.df <- data.frame (
+                          CollectiveId = integer(),
+                          CollectiveName = character(),
+                          stringsAsFactors = F
+                        )
+
+Journals.df <- data.frame (
+                          JournalsId = integer(),
+                          ISSN = character(),
+                          JournalIssueId = integer(),
+                          Title = character(),
+                          ISOAbbreviation = character(),
+                          stringsAsFactors = F
+                        )
+
+JournalIssues.df <- data.frame (
+                          JournalIssueId = integer(),
+                          Volume = character(),
+                          Issue = character(),
+                          PubDateId = integer(),
+                          stringsAsFactors = F
+                        )
+
+PubDates.df <- data.frame (
+                          PubDateId = integer(),
+                          Year = character(),
+                          Month = character(),
+                          Day = character(),
+                          MedlineDate = character(),
+                          SeasonId = integer(),
+                          stringsAsFactors = F
+                        )
+
+Season.df <- data.frame (
+                          SeasonId = integer(),
+                          SeasonName = character(),
+                          stringsAsFactors = F
+                        )
+
+```
+
+Articles.df[m, 2] <- parseJournals()
+
+```{r}
+numArticles <- xmlSize(root)
+
+for (m in 1 : numArticles) {
+  Language <- xpathSApply(xmlDOM, "//PubmedArticle/Article/Language", xmlValue)[1]
+  ArticleTitle <- xpathSApply(xmlDOM, "//PubmedArticle/Article/ArticleTitle", xmlValue)[1]
+  
+  Articles.df[m, 1] <- m
+  
+  Articles.df[m, 3] <- Language
+  Articles.df[m, 4] <- Title
+  
+}
+
+```
+
+Function parseJournals
+```{r}
+parseJournals <- function(journal) {
+  newJournal.df <- data.frame (
+                          ISSN = character(),
+                          JournalIssueId = integer(),
+                          Title = character(),
+                          ISOAbbreviation = character(),
+                          stringsAsFactors = F
+                        )
+  
+  ISSN <- xpathSApply(xmlDOM, "//PubmedArticle/Article/Journal/ISSN", xmlValue)
+  Title <- xpathSApply(xmlDOM, "//PubmedArticle/Article/Journal/Title", xmlValue)
+  ISOAbbreviation <- xpathSApply(xmlDOM, "//PubmedArticle/Article/Journal/ISOAbbreviation", xmlValue)
+  newJournal.df[1, 1] <- ISSN
+  newJournal.df[1, 2] <- parseJournalIssue()
+  newJournal.df[1, 3] <- Title
+  newJournal.df[1, 4] <- ISOAbbreviation
+  return (newJournal.df)
+}
+```
+
+Function parseJournalIssue
+```{r}
+parseJournalIssue <- function(journalIssue) {
+  newjournalIssue.df <- data.frame (
+                          Volume = character(),
+                          Issue = character(),
+                          PubDateId = integer(),
+                          stringsAsFactors = F
+                        )
+  
+  Volume <- xpathSApply(xmlDOM, "//PubmedArticle/Article/Journal/JournalIssue/Volume", xmlValue)
+  Issue <- xpathSApply(xmlDOM, "//PubmedArticle/Article/Journal/JournalIssue/Issue", xmlValue)
+  newjournalIssue.df[1, 1] <- Volume
+  newjournalIssue.df[1, 2] <- Issue
+  newjournalIssue.df[1, 3] <- parsePubDate()
+  return (newjournalIssue.df)
+}
+```
+
+Function parsePubDate
+```{r}
+parsePubDate <- function(pubDate) {
+  newPubDate.df <- data.frame (
+                          Year = character(),
+                          Month = character(),
+                          Day = character(),
+                          MedlineDate = character(),
+                          SeasonId = integer(),
+                          stringsAsFactors = F
+                        )
+  
+  nSize <- xmlSize(PubDate)
+  for (m in 1 : nSize) {
+    value <- xmlValue(pubDate[[m]])
+    name <- xmlName(pubDate[[m]])
+    if (name == "Year") {
+      newPubDate.df[1, 1] <- value
+    } else if (name == "Month") {
+      newPubDate.df[1, 2] <- value
+    } else if (name == "Day") {
+      newPubDate.df[1, 3] <- value
+    } else if (name == "MedlineDate") {
+      newPubDate.df[1, 4] <- value
+    } else if (name == "Season") {
+      exist <- elementExists(value, Season.df)
+      if (exist == 0) {
+        pk.Season <- nrow(Season.df) + 1
+        Season.df[pk.Season, 2] <- value
+        Season.df[pk.Season, 1] <- pk.Season
+        newPubDate.df[1, 5] <- pk.Season
+        print(Season.df)
+      } else {
+        newPubDate.df[1, 5] <- exist
+      }
+      
+    }
+  }
+  return (newPubDate.df)
+}
+```
+  
+  pk.author <- rowExists(author[i,], Authors.df[,3:ncol(Authors.df)])
+    if (pk.author == 0) {
+    # does not exist, so add
+    pk.author <- nrow(Authors.df) + 1
+    Authors.df[pk.author,3:ncol(Authors.df)] <- author[i,]
+    Authors.df[pk.author,1] <- pk.author
+    
+    
+function: parseSeason
+```{r}
+parseSeason <- function(value, Season.df) {
+  pk.Season <- nrow(Season.df) + 1
+  Season.df[pk.Season, 2] <- value
+  Season.df[pk.Season, 1] <- pk.Season
+}
+
+```
+
+
+```{r}
+pk.Season <- nrow(Season.df) + 1
+Season.df[pk.Season, 2] <- "Summer"
+Season.df[pk.Season, 1] <- pk.Season
+
+Season.df
+```
+  
+  
+```{r}
+for (m in 1 : numArticles) {
+  article <- root[[m]]
+  Journal <- article[[1]][[1]]
+  JournalIssue <- Journal[[2]]
+  PubDate <- JournalIssue[[3]]
+  newDf <- parsePubDate(PubDate)
+  print(newDf)
+  
+}
+
+```
+
+```{r}
+article <- root[[1]]
+Journal <- article[[1]][[1]]
+JournalIssue <- Journal[[2]]
+JournalIssue
+```
+
+
+
+```{r}
+article <- root[[1]]
+Journal <- article[[1]][[1]]
+JournalIssue <- Journal[[2]]
+PubDate <- JournalIssue[[3]]
+PubDate
+```
+
+
+```{r}
+Authors.df
+```
+
+
+Tests:
+```{r}
+article <- root[[1]]
+authorList <- article[[1]][[4]]
+author <- parseAuthors(authorList)
+author[1,]
+```
+
+

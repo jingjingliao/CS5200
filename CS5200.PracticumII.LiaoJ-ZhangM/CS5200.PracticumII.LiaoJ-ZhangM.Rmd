@@ -1,0 +1,343 @@
+---
+title: "Practicum II"
+output: html_notebook
+author: Jingjing Liao, Mao Zhang
+---
+
+```{r}
+library(RSQLite)
+dbcon <- dbConnect(RSQLite::SQLite(), "article.db")
+```
+
+Create a normalized relational schema: Articles, Authors, Affiliation, Suffix, Collective, Journals, JournalIssues, PubDates, Season
+
+--Drop the tables if exists--
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS Articles;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS Authors;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS Suffix;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS Collective;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS Journals;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS JournalIssues;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS PubDates;
+```
+
+```{sql connection=dbcon}
+DROP TABLE IF EXISTS Season;
+```
+
+```{sql connection=dbcon}
+CREATE TABLE IF NOT EXISTS Articles (
+  ArticleId INTEGER PRIMARY KEY NOT NULL,
+  JournalId INTEGER,
+  Language TEXT,
+  ArticleTitle TEXT,
+  FOREIGN KEY (JournalId) REFERENCES Journals(JournalId)
+)
+```
+
+```{sql connection=dbcon}
+CREATE TABLE IF NOT EXISTS Authors (
+  AuthorId INTEGER PRIMARY KEY NOT NULL,
+  ArticleId INTEGER,
+  LastName TEXT,
+  ForeName TEXT,
+  Initials TEXT,
+  Affiliation TEXT,
+  SuffixId INTEGER,
+  CollectiveId INTEGER,
+  FOREIGN KEY (ArticleId) REFERENCES Articles(ArticleId),
+  FOREIGN KEY (SuffixId) REFERENCES Suffix(SuffixId),
+  FOREIGN KEY (CollectiveId) REFERENCES Collective(CollectiveId)
+)
+```
+
+```{sql connection=dbcon}
+CREATE TABLE IF NOT EXISTS Journals (
+  JournalId INTEGER PRIMARY KEY NOT NULL,
+  ISSN TEXT,
+  JournalIssueId INTEGER,
+  Title TEXT,
+  ISOAbbreviation TEXT,
+  FOREIGN KEY (JournalIssueId) REFERENCES JournalIssues(JournalIssueId)
+)
+```
+
+```{sql connection=dbcon}
+CREATE TABLE IF NOT EXISTS JournalIssues (
+  JournalIssueId INTEGER PRIMARY KEY NOT NULL,
+  Volume TEXT,
+  Issue TEXT,
+  PubDateId INTEGER,
+  FOREIGN KEY (PubDateId) REFERENCES PubDates(PubDateId)
+)
+```
+
+```{sql connection=dbcon}
+CREATE TABLE IF NOT EXISTS PubDates (
+  PubDateId INTEGER PRIMARY KEY NOT NULL,
+  Year TEXT,
+  Month TEXT,
+  Day TEXT,
+  MedlineDate TEXT,
+  SeasonId INTEGER,
+  FOREIGN KEY (SeasonId) REFERENCES Season(SeasonId)
+)
+```
+
+xmlfn <- "pubmed-tfm-xml/pubmed22n0001-tf.xml"
+xmlfn <- "pubmed-tfm-xml/sampleData.xml"
+```{r}
+library(XML)
+xmlfn <- "pubmed-tfm-xml/sampleData.xml"
+xmlDOM <- xmlParse(xmlfn, validate=T)
+root <- xmlRoot(xmlDOM)
+root
+```
+
+Create data frame for Articles, Authors, Suffix, Collective, Journals, JournalIssues, PubDates, Season
+
+```{r}
+Articles.df <- data.frame (
+                            ArticleId = integer(),
+                            JournalId = integer(),
+                            Language = character(),
+                            ArticleTitle = character(),
+                            stringsAsFactors = F
+                          )
+
+
+Authors.df <- data.frame (
+                          AuthorId = integer(),
+                          ArticleId = integer(),
+                          LastName = character(),
+                          ForeName = character(),
+                          Initials = character(),
+                          Affiliation = character(),
+                          SuffixId = integer(),
+                          CollectiveId = integer(),
+                          stringsAsFactors = F
+                        )
+
+Suffix.df <- data.frame (
+                          SuffixId = integer(),
+                          SuffixName = character(),
+                          stringsAsFactors = F
+                        )
+
+Collective.df <- data.frame (
+                          CollectiveId = integer(),
+                          CollectiveName = character(),
+                          stringsAsFactors = F
+                        )
+
+Journals.df <- data.frame (
+                          JournalsId = integer(),
+                          ISSN = character(),
+                          JournalIssueId = integer(),
+                          Title = character(),
+                          ISOAbbreviation = character(),
+                          stringsAsFactors = F
+                        )
+
+JournalIssues.df <- data.frame (
+                          JournalIssueId = integer(),
+                          Volume = character(),
+                          Issue = character(),
+                          PubDateId = integer(),
+                          stringsAsFactors = F
+                        )
+
+PubDates.df <- data.frame (
+                          PubDateId = integer(),
+                          Year = character(),
+                          Month = character(),
+                          Day = character(),
+                          MedlineDate = character(),
+                          SeasonId = integer(),
+                          stringsAsFactors = F
+                        )
+
+Season.df <- data.frame (
+                          SeasonId = integer(),
+                          SeasonName = character(),
+                          stringsAsFactors = F
+                        )
+
+```
+
+Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise
+```{r}
+elementExists <- function(element, df) {
+  n <- nrow(df)
+  if (n == 0) {
+    return (0)
+  }
+  for (i in 1:n) {
+    if (element == df[i, 2]) {
+      return (i)
+    }
+  }
+  return (0)
+}
+```
+
+Function: rowExists
+Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise. The columns in the row aRow are expected to be in the same order as the columns in the data frame aDF.
+```{r}
+rowExists <- function (aRow, aDF)
+{
+  # check if that author is already in the data frame
+  n <- nrow(aDF)
+  c <- ncol(aDF)
+  
+  if (n == 0)
+  {
+    # data frame is empty, so can't exist
+    return(0)
+  }
+  
+  for (a in 1 : n) {
+    if (!is.na(aDF[a, 1]) & !is.na(aRow[1,1]) & aDF[a, 1] == aRow[1,1] & !is.na(aDF[a, 2]) & !is.na(aRow[1,2]) & aDF[a, 2] == aRow[1,2]) {
+      return (a)
+    }
+  }
+ 
+  # none matched
+  return(0)
+}
+```
+
+Function: parseAuthors
+```{r}
+parseAuthors <- function(authorList)
+{
+  newAuthor.df <- data.frame (
+                          LastName = character(),
+                          ForeName = character(),
+                          Initials = character(),
+                          Affiliation = character(),
+                          SuffixId = integer(),
+                          CollectiveId = integer(),
+                          stringsAsFactors = F
+                        )
+  n <- xmlSize(authorList)
+  if (n > 1) {
+    # extract each of the <Author> nodes under <AuthorList>
+  for (m in 1 : n) {
+    anAuthor <- authorList[[m]]
+    nSize <- xmlSize(anAuthor) # Count how many elements for an Author
+    for (i in 1 : nSize) {
+      if (is.na(anAuthor[[i]])) {
+        value <- xmlValue(anAuthor[[i]])
+      name <- xmlName(anAuthor[[i]])
+      if (name == "LastName") {
+        newAuthor.df[m, 1] <- value
+      } else if (name == "ForeName") {
+        newAuthor.df[m, 2] <- value
+      } else if (name == "Initials") {
+        newAuthor.df[m, 3] <- value
+      } else if (name == "AffiliationInfo") {
+        affiliation <- xmlValue(anAuthor[[i]][[1]])
+        newAuthor.df[m, 4] <- affiliation
+      } else if (name == "Suffix") {
+        exist <- elementExists(value, Suffix.df)
+        if (exist == 0) {
+          pk.suffix <- nrow(Suffix.df) + 1
+          Suffix.df[pk.suffix, 1] <<- pk.suffix
+          Suffix.df[pk.suffix, 2] <<- value
+          newAuthor.df[m, 5] <- pk.suffix
+        } else {
+          newAuthor.df[m, 5] <- exist
+        }
+        
+      } else if (name == "CollectiveName") {
+        exist <- elementExists(value, Collective.df)
+        if (exist == 0) {
+          pk.collective <- nrow(Collective.df) + 1
+          Collective.df[pk.collective, 1] <<- pk.collective
+          Collective.df[pk.collective, 2] <<- value
+          newAuthor.df[m, 6] <- pk.collective
+        } else {
+          newAuthor.df[m, 6] <- exist
+        }
+        
+      }
+      }
+      
+    }
+  }
+  }
+  
+  return (newAuthor.df)
+}
+```
+
+```{r}
+numArticles <- xmlSize(root)
+for (m in 1 : numArticles) {
+  article <- root[[m]]
+  authors <- article[[1]][[4]]
+  author <- parseAuthors(authors)
+  if (author > 0) {
+      nAuthor <- nrow(author)
+      for (i in 1 : nAuthor) {
+        # check if each author already exists
+        
+          
+          pk.author <- rowExists(author[i,], Authors.df[,3:ncol(Authors.df)])
+        if (pk.author == 0) {
+        # does not exist, so add
+        pk.author <- nrow(Authors.df) + 1
+        Authors.df[pk.author,3:ncol(Authors.df)] <- author[i,]
+        Authors.df[pk.author,1] <- pk.author
+       }
+    
+     }
+  }
+
+}
+
+```
+
+```{r}
+Authors.df
+```
+```{r}
+Suffix.df
+```
+
+```{r}
+article <- root[[7]]
+authors <- article[[1]][[4]]
+author <- parseAuthors(authors)
+  author
+```
+
+
+
+
+
+
+```{r}
+dbDisconnect(dbcon)
+```
+
