@@ -12,7 +12,7 @@ library(r2r)
 ```
 
 ```{r}
-xmlfn <- "pubmed-tfm-xml/pubmed22n0001-tf.xml"
+xmlfn <- "pubmed-tfm-xml/sampleData.xml"
 xmlDOM <- xmlParse(xmlfn, validate=T)
 root <- xmlRoot(xmlDOM)
 ```
@@ -53,18 +53,33 @@ Season.df <- data.frame (
 
 ```
 
+Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise
 ```{r}
-pubDateHashmap <- hashmap()
+elementExists <- function(element, df) {
+  n <- nrow(df)
+  if (n == 0) {
+    return (0)
+  }
+  for (i in 1:n) {
+    if (element == df[i, 2]) {
+      return (i)
+    }
+  }
+  return (0)
+}
 ```
 
-Function: pubDateExists
-Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise and add it to the pubDateExists
+Function: dataExists
+Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise and add it to the hashmap
+if an author has the same lastname and forename, we treat it as the same author
+if a journal has the same ISSN, and Title, we treat it as the same journal
+if a pubDate has the same year, month, day and seasonId, we treat it as the same pubDate
 ```{r}
-pubDateExists <- function(date) {
-  pk <- query(pubDateHashmap, date)
+dataExists <- function(hashmap, df, data) {
+  pk <- query(hashmap, data)
   if (is.null(pk)) {
-    pk.date <- nrow(PubDates.df) + 1
-    insert(pubDateHashmap, date, pk.date)
+    pk <- nrow(df) + 1
+    insert(hashmap, data, pk)
     return (0)
   } else {
     return (pk)
@@ -72,6 +87,9 @@ pubDateExists <- function(date) {
 }
 ```
 
+```{r}
+pubDateHashmap <- hashmap()
+```
 
 Function:parsePubDate
 ```{r}
@@ -115,8 +133,9 @@ parsePubDate <- function(pubDate) {
   year <- newPubDate.df$Year
   month <- newPubDate.df$Month
   day <- newPubDate.df$Day
-  date <- paste(year, " ", month, " ", day)
-  pk.date <- pubDateExists(date)
+  seasonId <- newPubDate.df$SeasonId
+  date <- paste(c(year, month, day, seasonId), collapse = " ") 
+  pk.date <- dataExists(pubDateHashmap, PubDates.df, date)
   if (pk.date == 0) {
     # does not exist, so add
     pk.date <- nrow(PubDates.df) + 1
@@ -195,22 +214,6 @@ parseJournals <- function(journal) {
 journalHashmap <- hashmap()
 ```
 
-Function: journalExists
-Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise and add it to the journalExists
-if a journal has the same ISSN, and Title, we treat then as the same journal
-```{r}
-journaleExists <- function(journalInfo) {
-  pk <- query(journalHashmap, journalInfo)
-  if (is.null(pk)) {
-    pk.journale <- nrow(Journals.df) + 1
-    insert(journalHashmap, journalInfo, pk.journale)
-    return (0)
-  } else {
-    return (pk)
-  }
-}
-```
-
 ```{r}
 numArticles <- xmlSize(root)
 for (m in 1 : numArticles) {
@@ -220,7 +223,7 @@ for (m in 1 : numArticles) {
   ISSN <- newJournal$ISSN
   Title <- newJournal$Title
   journalInfo <- paste(c(ISSN, Title), collapse = " ")
-  pk.journal <- journaleExists(journalInfo)
+  pk.journal <- dataExists(journalHashmap, Journals.df, journalInfo)
   if (pk.journal == 0) {
     # does not exist, so add
     pk.journal <- nrow(Journals.df) + 1
