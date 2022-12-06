@@ -107,7 +107,7 @@ xmlfn <- "pubmed-tfm-xml/pubmed22n0001-tf.xml"
 xmlfn <- "pubmed-tfm-xml/sampleData.xml"
 ```{r}
 library(XML)
-xmlfn <- "pubmed-tfm-xml/sampleData.xml"
+xmlfn <- "pubmed-tfm-xml/pubmed22n0001-tf.xml"
 xmlDOM <- xmlParse(xmlfn, validate=T)
 root <- xmlRoot(xmlDOM)
 root
@@ -200,29 +200,24 @@ elementExists <- function(element, df) {
 }
 ```
 
-Function: rowExists
-Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise. The columns in the row aRow are expected to be in the same order as the columns in the data frame aDF.
+
 ```{r}
-rowExists <- function (aRow, aDF)
-{
-  # check if that author is already in the data frame
-  n <- nrow(aDF)
-  c <- ncol(aDF)
-  
-  if (n == 0)
-  {
-    # data frame is empty, so can't exist
-    return(0)
+library(r2r)
+authorsHashmap <- hashmap()
+```
+
+Function: authorExists
+Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise and add it to the authorsHashmap
+```{r}
+authorExists <- function(name) {
+  pk <- query(authorsHashmap, name)
+  if (is.null(pk)) {
+    pk.author <- nrow(Authors.df) + 1
+    insert(authorsHashmap, name, pk.author)
+    return (0)
+  } else {
+    return (pk)
   }
-  
-  for (a in 1 : n) {
-    if (!is.na(aDF[a, 1]) & !is.na(aRow[1,1]) & aDF[a, 1] == aRow[1,1] & !is.na(aDF[a, 2]) & !is.na(aRow[1,2]) & aDF[a, 2] == aRow[1,2]) {
-      return (a)
-    }
-  }
- 
-  # none matched
-  return(0)
 }
 ```
 
@@ -240,14 +235,14 @@ parseAuthors <- function(authorList)
                           stringsAsFactors = F
                         )
   n <- xmlSize(authorList)
-  if (n > 1) {
+  
     # extract each of the <Author> nodes under <AuthorList>
   for (m in 1 : n) {
     anAuthor <- authorList[[m]]
     nSize <- xmlSize(anAuthor) # Count how many elements for an Author
-    for (i in 1 : nSize) {
-      if (is.na(anAuthor[[i]])) {
-        value <- xmlValue(anAuthor[[i]])
+    if (nSize > 0) {
+        for (i in 1 : nSize) {
+      value <- xmlValue(anAuthor[[i]])
       name <- xmlName(anAuthor[[i]])
       if (name == "LastName") {
         newAuthor.df[m, 1] <- value
@@ -281,10 +276,11 @@ parseAuthors <- function(authorList)
         }
         
       }
-      }
       
     }
-  }
+    }
+  
+  
   }
   
   return (newAuthor.df)
@@ -297,20 +293,20 @@ for (m in 1 : numArticles) {
   article <- root[[m]]
   authors <- article[[1]][[4]]
   author <- parseAuthors(authors)
-  if (author > 0) {
-      nAuthor <- nrow(author)
+  nAuthor <- nrow(author)
+  if (nAuthor > 0) {
       for (i in 1 : nAuthor) {
         # check if each author already exists
-        
-          
-          pk.author <- rowExists(author[i,], Authors.df[,3:ncol(Authors.df)])
+         lastName <- author[i,]$LastName
+         foreName <- author[i,]$ForeName
+         name <- paste(lastName, " ", foreName)
+         pk.author <- query(authorsHashmap, name)
         if (pk.author == 0) {
         # does not exist, so add
         pk.author <- nrow(Authors.df) + 1
         Authors.df[pk.author,3:ncol(Authors.df)] <- author[i,]
         Authors.df[pk.author,1] <- pk.author
        }
-    
      }
   }
 
@@ -319,22 +315,44 @@ for (m in 1 : numArticles) {
 ```
 
 ```{r}
+article <- root[[1]]
+  authors <- article[[1]][[4]]
+  author <- parseAuthors(authors)
+  author
+```
+
+```{r}
+  nAuthor <- nrow(author)
+lastName <- author[1,]$LastName
+firstName <- author[1,]$ForeName
+name <- paste(lastName, " ", firstName)
+name
+```
+
+
+
+
+
+```{r}
 Authors.df
 ```
 ```{r}
 Suffix.df
 ```
+```{r}
+Collective.df
+```
+
 
 ```{r}
 article <- root[[7]]
 authors <- article[[1]][[4]]
 author <- parseAuthors(authors)
-  author
+nAuthor <- nrow(author)
+nAuthor
+pk.author <- rowExists(author[1,], Authors.df[,3:ncol(Authors.df)])
+
 ```
-
-
-
-
 
 
 ```{r}

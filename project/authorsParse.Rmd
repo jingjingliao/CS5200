@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(XML)
+xmlfn <- "pubmed-tfm-xml/sampleData.xml"
+xmlDOM <- xmlParse(xmlfn, validate=T)
+root <- xmlRoot(xmlDOM)
+root
+```
+
+```{r}
+Articles.df <- data.frame (
+                            ArticleId = integer(),
+                            JournalId = integer(),
+                            Language = character(),
+                            ArticleTitle = character(),
+                            stringsAsFactors = F
+                          )
+Authors.df <- data.frame (
+                          AuthorId = integer(),
+                          ArticleId = integer(),
+                          LastName = character(),
+                          ForeName = character(),
+                          Initials = character(),
+                          Affiliation = character(),
+                          SuffixId = integer(),
+                          CollectiveId = integer(),
+                          stringsAsFactors = F
+                        )
+Suffix.df <- data.frame (
+                          SuffixId = integer(),
+                          SuffixName = character(),
+                          stringsAsFactors = F
+                        )
+Collective.df <- data.frame (
+                          CollectiveId = integer(),
+                          CollectiveName = character(),
+                          stringsAsFactors = F
+                        )
+```
+
+Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise
+```{r}
+elementExists <- function(element, df) {
+  n <- nrow(df)
+  if (n == 0) {
+    return (0)
+  }
+  for (i in 1:n) {
+    if (element == df[i, 2]) {
+      return (i)
+    }
+  }
+  return (0)
+}
+```
+
+Function: parseAuthors
+```{r}
+parseAuthors <- function (anAuthorNode) {
+  newAuthor.df <- data.frame (
+                          LastName = character(),
+                          ForeName = character(),
+                          Initials = character(),
+                          Affiliation = character(),
+                          SuffixId = integer(),
+                          CollectiveId = integer(),
+                          stringsAsFactors = F
+                        )
+  n <- xmlSize(anAuthorNode)
+  # extract each of the <Author> nodes under <AuthorList>
+  for (m in 1:n) {
+    anAuthor <- anAuthorNode[[m]]
+    
+  }
+}
+
+```
+

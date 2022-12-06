@@ -236,78 +236,21 @@
 		  </AuthorList>
 		</Article>
 	  </PubmedArticle>
-	  <PubmedArticle PMID="152">
+	  <PubmedArticle PMID="196">
 		<Article>
 		  <Journal>
-			<JournalIssue CitedMedium="Print">
-			  <Volume>280</Volume>
-			  <Issue>13</Issue>
-			  <PubDate>
-				<Year>1975</Year>
-				<Month>Apr</Month>
-				<Day>07</Day>
-			  </PubDate>
+			<ISSN IssnType="Electronic">1539-3704</ISSN>
+			<JournalIssue CitedMedium="Internet">
+			  <Volume>86</Volume>
+			  <Issue>2</Issue>
+			  
 			</JournalIssue>
-			<Title>Comptes rendus hebdomadaires des seances de l'Academie des sciences. Serie D: Sciences naturelles</Title>
-			<ISOAbbreviation>C R Acad Hebd Seances Acad Sci D</ISOAbbreviation>
-		  </Journal>
-		  <Language>fre</Language>
-		  <ArticleTitle>[Spontaneous mortality and vascular lesions in 3 rat strains with different blood pressure levels].</ArticleTitle>
-		  <AuthorList CompleteYN="Y">
-			<Author ValidYN="Y">
-			  <LastName>Dupont</LastName>
-			  <ForeName>J</ForeName>
-			  <Initials>J</Initials>
-			</Author>
-			<Author ValidYN="Y">
-			  <LastName>Dupont</LastName>
-			  <ForeName>J C</ForeName>
-			  <Initials>JC</Initials>
-			</Author>
-			<Author ValidYN="Y">
-			  <LastName>Milon</LastName>
-			  <ForeName>H</ForeName>
-			  <Initials>H</Initials>
-			</Author>
-			<Author ValidYN="Y">
-			  <LastName>Froment</LastName>
-			  <ForeName>A</ForeName>
-			  <Initials>A</Initials>
-			</Author>
-		  </AuthorList>
-		</Article>
-	  </PubmedArticle>
-	  <PubmedArticle PMID="168">
-		<Article>
-		  <Journal>
-			<ISSN IssnType="Print">0009-921X</ISSN>
-			<JournalIssue CitedMedium="Print">
-			  <Issue>113</Issue>
-			  <PubDate>
-				<MedlineDate>1975 Nov-Dec</MedlineDate>
-			  </PubDate>
-			</JournalIssue>
-			<Title>Clinical orthopaedics and related research</Title>
-			<ISOAbbreviation>Clin Orthop Relat Res</ISOAbbreviation>
+			<Title>Annals of internal medicine</Title>
+			<ISOAbbreviation>Ann Intern Med</ISOAbbreviation>
 		  </Journal>
 		  <Language>eng</Language>
-		  <ArticleTitle>Effects of graded infusions of monomethylmethacrylate on coagulation, blood lipids, respiration and circulation. An experimental study in dogs.</ArticleTitle>
+		  <ArticleTitle>Bone marrow transplantation with intensive combination chemotherapy/radiation therapy (SCARI) in acute leukemia.</ArticleTitle>
 		  <AuthorList CompleteYN="Y">
-			<Author ValidYN="Y">
-			  <LastName>Modig</LastName>
-			  <ForeName>J</ForeName>
-			  <Initials>J</Initials>
-			</Author>
-			<Author ValidYN="Y">
-			  <LastName>Busch</LastName>
-			  <ForeName>C</ForeName>
-			  <Initials>C</Initials>
-			</Author>
-			<Author ValidYN="Y">
-			  <LastName>Waernbaum</LastName>
-			  <ForeName>G</ForeName>
-			  <Initials>G</Initials>
-			</Author>
 		  </AuthorList>
 		</Article>
 	  </PubmedArticle>

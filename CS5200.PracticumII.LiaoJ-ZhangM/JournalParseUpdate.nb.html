@@ -1764,251 +1764,11 @@ library(r2r)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShYTUwpXG54bWxmbiA8LSBcInB1Ym1lZC10Zm0teG1sL3NhbXBsZURhdGEueG1sXCJcbnhtbERPTSA8LSB4bWxQYXJzZSh4bWxmbiwgdmFsaWRhdGU9VClcbnJvb3QgPC0geG1sUm9vdCh4bWxET00pXG5yb290XG5gYGAifQ== -->
-<pre class="r"><code>library(XML)
-xmlfn &lt;- &quot;pubmed-tfm-xml/sampleData.xml&quot;
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueG1sZm4gPC0gXCJwdWJtZWQtdGZtLXhtbC9zYW1wbGVEYXRhLnhtbFwiXG54bWxET00gPC0geG1sUGFyc2UoeG1sZm4sIHZhbGlkYXRlPVQpXG5yb290IDwtIHhtbFJvb3QoeG1sRE9NKVxuYGBgIn0= -->
+<pre class="r"><code>xmlfn &lt;- &quot;pubmed-tfm-xml/sampleData.xml&quot;
 xmlDOM &lt;- xmlParse(xmlfn, validate=T)
-root &lt;- xmlRoot(xmlDOM)
-root</code></pre>
+root &lt;- xmlRoot(xmlDOM)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiPFB1Ym1lZEFydGljbGVTZXQ+XG4gIDxQdWJtZWRBcnRpY2xlIFBNSUQ9XCIxXCI+XG4gICAgPEFydGljbGU+XG4gICAgICA8Sm91cm5hbD5cbiAgICAgICAgPElTU04gSXNzblR5cGU9XCJQcmludFwiPjAwMDYtMjk0NDxcL0lTU04+XG4gICAgICAgIDxKb3VybmFsSXNzdWUgQ2l0ZWRNZWRpdW09XCJQcmludFwiPlxuICAgICAgICAgIDxWb2x1bWU+MTM8XC9Wb2x1bWU+XG4gICAgICAgICAgPElzc3VlPjI8XC9Jc3N1ZT5cbiAgICAgICAgICA8UHViRGF0ZT5cbiAgICAgICAgICAgIDxZZWFyPjE5NzU8XC9ZZWFyPlxuICAgICAgICAgICAgPE1vbnRoPkp1bjxcL01vbnRoPlxuICAgICAgICAgIDxcL1B1YkRhdGU+XG4gICAgICAgIDxcL0pvdXJuYWxJc3N1ZT5cbiAgICAgICAgPFRpdGxlPkJpb2NoZW1pY2FsIG1lZGljaW5lPFwvVGl0bGU+XG4gICAgICAgIDxJU09BYmJyZXZpYXRpb24+QmlvY2hlbSBNZWQ8XC9JU09BYmJyZXZpYXRpb24+XG4gICAgICA8XC9Kb3VybmFsPlxuICAgICAgPExhbmd1YWdlPmVuZzxcL0xhbmd1YWdlPlxuICAgICAgPEFydGljbGVUaXRsZT5Gb3JtYXRlIGFzc2F5IGluIGJvZHkgZmx1aWRzOiBhcHBsaWNhdGlvbiBpbiBtZXRoYW5vbCBwb2lzb25pbmcuPFwvQXJ0aWNsZVRpdGxlPlxuICAgICAgPEF1dGhvckxpc3QgQ29tcGxldGVZTj1cIllcIj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5NYWthcjxcL0xhc3ROYW1lPlxuICAgICAgICAgIDxGb3JlTmFtZT5BIEI8XC9Gb3JlTmFtZT5cbiAgICAgICAgICA8SW5pdGlhbHM+QUI8XC9Jbml0aWFscz5cbiAgICAgICAgPFwvQXV0aG9yPlxuICAgICAgICA8QXV0aG9yIFZhbGlkWU49XCJZXCI+XG4gICAgICAgICAgPExhc3ROYW1lPk1jTWFydGluPFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPksgRTxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5LRTxcL0luaXRpYWxzPlxuICAgICAgICA8XC9BdXRob3I+XG4gICAgICAgIDxBdXRob3IgVmFsaWRZTj1cIllcIj5cbiAgICAgICAgICA8TGFzdE5hbWU+UGFsZXNlPFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPk08XC9Gb3JlTmFtZT5cbiAgICAgICAgICA8SW5pdGlhbHM+TTxcL0luaXRpYWxzPlxuICAgICAgICA8XC9BdXRob3I+XG4gICAgICAgIDxBdXRob3IgVmFsaWRZTj1cIllcIj5cbiAgICAgICAgICA8TGFzdE5hbWU+VGVwaGx5PFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPlQgUjxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5UUjxcL0luaXRpYWxzPlxuICAgICAgICA8XC9BdXRob3I+XG4gICAgICA8XC9BdXRob3JMaXN0PlxuICAgIDxcL0FydGljbGU+XG4gIDxcL1B1Ym1lZEFydGljbGU+XG4gIDxQdWJtZWRBcnRpY2xlIFBNSUQ9XCIxMzcwMFwiPlxuICAgIDxBcnRpY2xlPlxuICAgICAgPEpvdXJuYWw+XG4gICAgICAgIDxJU1NOIElzc25UeXBlPVwiUHJpbnRcIj4wMDAzLTQ1MDk8XC9JU1NOPlxuICAgICAgICA8Sm91cm5hbElzc3VlIENpdGVkTWVkaXVtPVwiUHJpbnRcIj5cbiAgICAgICAgICA8Vm9sdW1lPjM0PFwvVm9sdW1lPlxuICAgICAgICAgIDxJc3N1ZT45LTEwPFwvSXNzdWU+XG4gICAgICAgICAgPFB1YkRhdGU+XG4gICAgICAgICAgICA8TWVkbGluZURhdGU+MTk3NiBTZXAtT2N0PFwvTWVkbGluZURhdGU+XG4gICAgICAgICAgPFwvUHViRGF0ZT5cbiAgICAgICAgPFwvSm91cm5hbElzc3VlPlxuICAgICAgICA8VGl0bGU+QW5uYWxlcyBwaGFybWFjZXV0aXF1ZXMgZnJhbmNhaXNlczxcL1RpdGxlPlxuICAgICAgICA8SVNPQWJicmV2aWF0aW9uPkFubiBQaGFybSBGcjxcL0lTT0FiYnJldmlhdGlvbj5cbiAgICAgIDxcL0pvdXJuYWw+XG4gICAgICA8TGFuZ3VhZ2U+ZnJlPFwvTGFuZ3VhZ2U+XG4gICAgICA8QXJ0aWNsZVRpdGxlPltJbmZsdWVuY2Ugb2YgYWN1dGUgYW5kIGNocm9uaWMgYWxjb2hvbGlzbSBvbiB0aGUgYWN0aXZpdHkgb2YgdHdvIGJlbnpvZGlhemVwaW5lczogb3hhemVwYW0gYW5kIG1lZGF6ZXBhbV0uPFwvQXJ0aWNsZVRpdGxlPlxuICAgICAgPEF1dGhvckxpc3QgQ29tcGxldGVZTj1cIllcIj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5Cb3VycmluZXQ8XC9MYXN0TmFtZT5cbiAgICAgICAgICA8Rm9yZU5hbWU+UDxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5QPFwvSW5pdGlhbHM+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5UYWtlZGE8XC9MYXN0TmFtZT5cbiAgICAgICAgICA8Rm9yZU5hbWU+SDxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5IPFwvSW5pdGlhbHM+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgIDxcL0F1dGhvckxpc3Q+XG4gICAgPFwvQXJ0aWNsZT5cbiAgPFwvUHVibWVkQXJ0aWNsZT5cbiAgPFB1Ym1lZEFydGljbGUgUE1JRD1cIjEzODk3XCI+XG4gICAgPEFydGljbGU+XG4gICAgICA8Sm91cm5hbD5cbiAgICAgICAgPElTU04gSXNzblR5cGU9XCJQcmludFwiPjAwMDctNTE0MDxcL0lTU04+XG4gICAgICAgIDxKb3VybmFsSXNzdWUgQ2l0ZWRNZWRpdW09XCJQcmludFwiPlxuICAgICAgICAgIDxWb2x1bWU+NTA8XC9Wb2x1bWU+XG4gICAgICAgICAgPElzc3VlPjQ8XC9Jc3N1ZT5cbiAgICAgICAgICA8UHViRGF0ZT5cbiAgICAgICAgICAgIDxZZWFyPjE5NzY8XC9ZZWFyPlxuICAgICAgICAgICAgPFNlYXNvbj5XaW50ZXI8XC9TZWFzb24+XG4gICAgICAgICAgPFwvUHViRGF0ZT5cbiAgICAgICAgPFwvSm91cm5hbElzc3VlPlxuICAgICAgICA8VGl0bGU+QnVsbGV0aW4gb2YgdGhlIGhpc3Rvcnkgb2YgbWVkaWNpbmU8XC9UaXRsZT5cbiAgICAgICAgPElTT0FiYnJldmlhdGlvbj5CdWxsIEhpc3QgTWVkPFwvSVNPQWJicmV2aWF0aW9uPlxuICAgICAgPFwvSm91cm5hbD5cbiAgICAgIDxMYW5ndWFnZT5lbmc8XC9MYW5ndWFnZT5cbiAgICAgIDxBcnRpY2xlVGl0bGU+UmVuw6kgRHVib3MgYW5kIHRoZSBjYXBzdWxhciBwb2x5c2FjY2hhcmlkZSBvZiBwbmV1bW9jb2NjdXM6IGFuIG9yYWwgaGlzdG9yeSBtZW1vaXIuPFwvQXJ0aWNsZVRpdGxlPlxuICAgICAgPEF1dGhvckxpc3QgQ29tcGxldGVZTj1cIllcIj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5CZW5pc29uPFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPlM8XC9Gb3JlTmFtZT5cbiAgICAgICAgICA8SW5pdGlhbHM+UzxcL0luaXRpYWxzPlxuICAgICAgICA8XC9BdXRob3I+XG4gICAgICA8XC9BdXRob3JMaXN0PlxuICAgIDxcL0FydGljbGU+XG4gIDxcL1B1Ym1lZEFydGljbGU+XG4gIDxQdWJtZWRBcnRpY2xlIFBNSUQ9XCIxMzkxNlwiPlxuICAgIDxBcnRpY2xlPlxuICAgICAgPEpvdXJuYWw+XG4gICAgICAgIDxJU1NOIElzc25UeXBlPVwiUHJpbnRcIj4wMDA4LTQwMTg8XC9JU1NOPlxuICAgICAgICA8Sm91cm5hbElzc3VlIENpdGVkTWVkaXVtPVwiUHJpbnRcIj5cbiAgICAgICAgICA8Vm9sdW1lPjU1PFwvVm9sdW1lPlxuICAgICAgICAgIDxJc3N1ZT4xPFwvSXNzdWU+XG4gICAgICAgICAgPFB1YkRhdGU+XG4gICAgICAgICAgICA8WWVhcj4xOTc3PFwvWWVhcj5cbiAgICAgICAgICAgIDxNb250aD5KYW48XC9Nb250aD5cbiAgICAgICAgICA8XC9QdWJEYXRlPlxuICAgICAgICA8XC9Kb3VybmFsSXNzdWU+XG4gICAgICAgIDxUaXRsZT5DYW5hZGlhbiBqb3VybmFsIG9mIGJpb2NoZW1pc3RyeTxcL1RpdGxlPlxuICAgICAgICA8SVNPQWJicmV2aWF0aW9uPkNhbiBKIEJpb2NoZW08XC9JU09BYmJyZXZpYXRpb24+XG4gICAgICA8XC9Kb3VybmFsPlxuICAgICAgPExhbmd1YWdlPmVuZzxcL0xhbmd1YWdlPlxuICAgICAgPEFydGljbGVUaXRsZT5DaGFyYWN0ZXJpemF0aW9uIGFuZCBzdWJzdHJhdGUgc3BlY2lmaWNpdHkgb2YgZnVtYXJ5bGFjZXRvYWNldGF0ZSBmdW1hcnlsaHlkcm9sYXNlLjxcL0FydGljbGVUaXRsZT5cbiAgICAgIDxBdXRob3JMaXN0IENvbXBsZXRlWU49XCJZXCI+XG4gICAgICAgIDxBdXRob3IgVmFsaWRZTj1cIllcIj5cbiAgICAgICAgICA8TGFzdE5hbWU+TWFodXJhbjxcL0xhc3ROYW1lPlxuICAgICAgICAgIDxGb3JlTmFtZT5EIEo8XC9Gb3JlTmFtZT5cbiAgICAgICAgICA8SW5pdGlhbHM+REo8XC9Jbml0aWFscz5cbiAgICAgICAgPFwvQXV0aG9yPlxuICAgICAgICA8QXV0aG9yIFZhbGlkWU49XCJZXCI+XG4gICAgICAgICAgPExhc3ROYW1lPkFuZ3VzPFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPlIgSDxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5SSDxcL0luaXRpYWxzPlxuICAgICAgICA8XC9BdXRob3I+XG4gICAgICAgIDxBdXRob3IgVmFsaWRZTj1cIllcIj5cbiAgICAgICAgICA8TGFzdE5hbWU+QnJhdW48XC9MYXN0TmFtZT5cbiAgICAgICAgICA8Rm9yZU5hbWU+QyBWPFwvRm9yZU5hbWU+XG4gICAgICAgICAgPEluaXRpYWxzPkNWPFwvSW5pdGlhbHM+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5TaW08XC9MYXN0TmFtZT5cbiAgICAgICAgICA8Rm9yZU5hbWU+UyBTPFwvRm9yZU5hbWU+XG4gICAgICAgICAgPEluaXRpYWxzPlNTPFwvSW5pdGlhbHM+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5TY2htaWR0PFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPkQgRTxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5ERTxcL0luaXRpYWxzPlxuICAgICAgICAgIDxTdWZmaXg+SnI8XC9TdWZmaXg+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgIDxcL0F1dGhvckxpc3Q+XG4gICAgPFwvQXJ0aWNsZT5cbiAgPFwvUHVibWVkQXJ0aWNsZT5cbiAgPFB1Ym1lZEFydGljbGUgUE1JRD1cIjE3MDkwXCI+XG4gICAgPEFydGljbGU+XG4gICAgICA8Sm91cm5hbD5cbiAgICAgICAgPElTU04gSXNzblR5cGU9XCJQcmludFwiPjAzMDQtMzk1OTxcL0lTU04+XG4gICAgICAgIDxKb3VybmFsSXNzdWUgQ2l0ZWRNZWRpdW09XCJQcmludFwiPlxuICAgICAgICAgIDxWb2x1bWU+MjxcL1ZvbHVtZT5cbiAgICAgICAgICA8SXNzdWU+MzxcL0lzc3VlPlxuICAgICAgICAgIDxQdWJEYXRlPlxuICAgICAgICAgICAgPFllYXI+MTk3NjxcL1llYXI+XG4gICAgICAgICAgICA8TW9udGg+U2VwPFwvTW9udGg+XG4gICAgICAgICAgPFwvUHViRGF0ZT5cbiAgICAgICAgPFwvSm91cm5hbElzc3VlPlxuICAgICAgICA8VGl0bGU+UGFpbjxcL1RpdGxlPlxuICAgICAgICA8SVNPQWJicmV2aWF0aW9uPlBhaW48XC9JU09BYmJyZXZpYXRpb24+XG4gICAgICA8XC9Kb3VybmFsPlxuICAgICAgPExhbmd1YWdlPmVuZzxcL0xhbmd1YWdlPlxuICAgICAgPEFydGljbGVUaXRsZT5BIGNvbXByZWhlbnNpdmUgdHJlYXRtZW50IGFwcHJvYWNoIHRvIGNocm9uaWMgbG93IGJhY2sgcGFpbi48XC9BcnRpY2xlVGl0bGU+XG4gICAgICA8QXV0aG9yTGlzdCBDb21wbGV0ZVlOPVwiWVwiPlxuICAgICAgICA8QXV0aG9yIFZhbGlkWU49XCJZXCI+XG4gICAgICAgICAgPExhc3ROYW1lPkNhaXJuczxcL0xhc3ROYW1lPlxuICAgICAgICAgIDxGb3JlTmFtZT5Eb3VnbGFzPFwvRm9yZU5hbWU+XG4gICAgICAgICAgPEluaXRpYWxzPkQ8XC9Jbml0aWFscz5cbiAgICAgICAgICA8QWZmaWxpYXRpb25JbmZvPlxuICAgICAgICAgICAgPEFmZmlsaWF0aW9uPlNwaW5lIENlbnRlciwgUmFuY2hvIExvcyBBbWlnb3MgSG9zcGl0YWwsIDc2MDEgRWFzdCBJbXBlcmlhbCBIaWdod2F5LCBEb3duZXksIENhbGlmLiA5MDI0MiBVLlMuQS48XC9BZmZpbGlhdGlvbj5cbiAgICAgICAgICA8XC9BZmZpbGlhdGlvbkluZm8+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5UaG9tYXM8XC9MYXN0TmFtZT5cbiAgICAgICAgICA8Rm9yZU5hbWU+THlubjxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5MPFwvSW5pdGlhbHM+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5Nb29uZXk8XC9MYXN0TmFtZT5cbiAgICAgICAgICA8Rm9yZU5hbWU+VmVydDxcL0ZvcmVOYW1lPlxuICAgICAgICAgIDxJbml0aWFscz5WPFwvSW5pdGlhbHM+XG4gICAgICAgIDxcL0F1dGhvcj5cbiAgICAgICAgPEF1dGhvciBWYWxpZFlOPVwiWVwiPlxuICAgICAgICAgIDxMYXN0TmFtZT5QYWNlPFwvTGFzdE5hbWU+XG4gICAgICAgICAgPEZvcmVOYW1lPkJsYWlyIEo8XC9Gb3JlTmFtZT5cbiAgICAgICAgICA8SW5pdGlhbHM+Qko8XC9Jbml0aWFscz5cbiAgICAgICAgPFwvQXV0aG9yPlxuICAgICAgPFwvQXV0aG9yTGlzdD5cbiAgICA8XC9BcnRpY2xlPlxuICA8XC9QdWJtZWRBcnRpY2xlPlxuICA8UHVibWVkQXJ0aWNsZSBQTUlEPVwiMTM2OTZcIj5cbiAgICA8QXJ0aWNsZT5cbiAgICAgIDxKb3VybmFsPlxuICAgICAgICA8SVNTTiBJc3NuVHlwZT1cIkVsZWN0cm9uaWNcIj4xNTM5LTM3MDQ8XC9JU1NOPlxuICAgICAgICA8Sm91cm5hbElzc3VlIENpdGVkTWVkaXVtPVwiSW50ZXJuZXRcIj5cbiAgICAgICAgICA8Vm9sdW1lPjg2PFwvVm9sdW1lPlxuICAgICAgICAgIDxJc3N1ZT4yPFwvSXNzdWU+XG4gICAgICAgICAgPFB1YkRhdGU+XG4gICAgICAgICAgICA8WWVhcj4xOTc3PFwvWWVhcj5cbiAgICAgICAgICAgIDxNb250aD5GZWI8XC9Nb250aD5cbiAgICAgICAgICA8XC9QdWJEYXRlPlxuICAgICAgICA8XC9Kb3VybmFsSXNzdWU+XG4gICAgICAgIDxUaXRsZT5Bbm5hbHMgb2YgaW50ZXJuYWwgbWVkaWNpbmU8XC9UaXRsZT5cbiAgICAgICAgPElTT0FiYnJldmlhdGlvbj5Bbm4gSW50ZXJuIE1lZDxcL0lTT0FiYnJldmlhdGlvbj5cbiAgICAgIDxcL0pvdXJuYWw+XG4gICAgICA8TGFuZ3VhZ2U+ZW5nPFwvTGFuZ3VhZ2U+XG4gICAgICA8QXJ0aWNsZVRpdGxlPkJvbmUgbWFycm93IHRyYW5zcGxhbnRhdGlvbiB3aXRoIGludGVuc2l2ZSBjb21iaW5hdGlvbiBjaGVtb3RoZXJhcHkvcmFkaWF0aW9uIHRoZXJhcHkgKFNDQVJJKSBpbiBhY3V0ZSBsZXVrZW1pYS48XC9BcnRpY2xlVGl0bGU+XG4gICAgICA8QXV0aG9yTGlzdCBDb21wbGV0ZVlOPVwiWVwiPlxuICAgICAgICA8QXV0aG9yIFZhbGlkWU49XCJZXCI+XG4gICAgICAgICAgPENvbGxlY3RpdmVOYW1lPlRoZSBVQ0xBIEJvbmUgTWFycm93IFRyYW5zcGxhbnRhdGlvbiBHcm91cDxcL0NvbGxlY3RpdmVOYW1lPlxuICAgICAgICA8XC9BdXRob3I+XG4gICAgICA8XC9BdXRob3JMaXN0PlxuICAgIDxcL0FydGljbGU+XG4gIDxcL1B1Ym1lZEFydGljbGU+XG4gIDxQdWJtZWRBcnRpY2xlIFBNSUQ9XCIxOTZcIj5cbiAgICA8QXJ0aWNsZT5cbiAgICAgIDxKb3VybmFsPlxuICAgICAgICA8SVNTTiBJc3NuVHlwZT1cIkVsZWN0cm9uaWNcIj4xNTM5LTM3MDQ8XC9JU1NOPlxuICAgICAgICA8Sm91cm5hbElzc3VlIENpdGVkTWVkaXVtPVwiSW50ZXJuZXRcIj5cbiAgICAgICAgICA8Vm9sdW1lPjg2PFwvVm9sdW1lPlxuICAgICAgICAgIDxJc3N1ZT4yPFwvSXNzdWU+XG4gICAgICAgICAgPFB1YkRhdGU+XG4gICAgICAgICAgICA8WWVhcj4xOTc3PFwvWWVhcj5cbiAgICAgICAgICAgIDxNb250aD5GZWI8XC9Nb250aD5cbiAgICAgICAgICA8XC9QdWJEYXRlPlxuICAgICAgICA8XC9Kb3VybmFsSXNzdWU+XG4gICAgICAgIDxUaXRsZT5Bbm5hbHMgb2YgaW50ZXJuYWwgbWVkaWNpbmU8XC9UaXRsZT5cbiAgICAgICAgPElTT0FiYnJldmlhdGlvbj5Bbm4gSW50ZXJuIE1lZDxcL0lTT0FiYnJldmlhdGlvbj5cbiAgICAgIDxcL0pvdXJuYWw+XG4gICAgICA8TGFuZ3VhZ2U+ZW5nPFwvTGFuZ3VhZ2U+XG4gICAgICA8QXJ0aWNsZVRpdGxlPkJvbmUgbWFycm93IHRyYW5zcGxhbnRhdGlvbiB3aXRoIGludGVuc2l2ZSBjb21iaW5hdGlvbiBjaGVtb3RoZXJhcHkvcmFkaWF0aW9uIHRoZXJhcHkgKFNDQVJJKSBpbiBhY3V0ZSBsZXVrZW1pYS48XC9BcnRpY2xlVGl0bGU+XG4gICAgICA8QXV0aG9yTGlzdCBDb21wbGV0ZVlOPVwiWVwiPlxuXHRcdFx0XG5cdFx0ICA8XC9BdXRob3JMaXN0PlxuICAgIDxcL0FydGljbGU+XG4gIDxcL1B1Ym1lZEFydGljbGU+XG48XC9QdWJtZWRBcnRpY2xlU2V0PiBcbiJ9 -->
-<pre><code>&lt;PubmedArticleSet&gt;
-  &lt;PubmedArticle PMID=&quot;1&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Print&quot;&gt;0006-2944&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Print&quot;&gt;
-          &lt;Volume&gt;13&lt;/Volume&gt;
-          &lt;Issue&gt;2&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;Year&gt;1975&lt;/Year&gt;
-            &lt;Month&gt;Jun&lt;/Month&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Biochemical medicine&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Biochem Med&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;eng&lt;/Language&gt;
-      &lt;ArticleTitle&gt;Formate assay in body fluids: application in methanol poisoning.&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Makar&lt;/LastName&gt;
-          &lt;ForeName&gt;A B&lt;/ForeName&gt;
-          &lt;Initials&gt;AB&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;McMartin&lt;/LastName&gt;
-          &lt;ForeName&gt;K E&lt;/ForeName&gt;
-          &lt;Initials&gt;KE&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Palese&lt;/LastName&gt;
-          &lt;ForeName&gt;M&lt;/ForeName&gt;
-          &lt;Initials&gt;M&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Tephly&lt;/LastName&gt;
-          &lt;ForeName&gt;T R&lt;/ForeName&gt;
-          &lt;Initials&gt;TR&lt;/Initials&gt;
-        &lt;/Author&gt;
-      &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-  &lt;PubmedArticle PMID=&quot;13700&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Print&quot;&gt;0003-4509&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Print&quot;&gt;
-          &lt;Volume&gt;34&lt;/Volume&gt;
-          &lt;Issue&gt;9-10&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;MedlineDate&gt;1976 Sep-Oct&lt;/MedlineDate&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Annales pharmaceutiques francaises&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Ann Pharm Fr&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;fre&lt;/Language&gt;
-      &lt;ArticleTitle&gt;[Influence of acute and chronic alcoholism on the activity of two benzodiazepines: oxazepam and medazepam].&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Bourrinet&lt;/LastName&gt;
-          &lt;ForeName&gt;P&lt;/ForeName&gt;
-          &lt;Initials&gt;P&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Takeda&lt;/LastName&gt;
-          &lt;ForeName&gt;H&lt;/ForeName&gt;
-          &lt;Initials&gt;H&lt;/Initials&gt;
-        &lt;/Author&gt;
-      &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-  &lt;PubmedArticle PMID=&quot;13897&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Print&quot;&gt;0007-5140&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Print&quot;&gt;
-          &lt;Volume&gt;50&lt;/Volume&gt;
-          &lt;Issue&gt;4&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;Year&gt;1976&lt;/Year&gt;
-            &lt;Season&gt;Winter&lt;/Season&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Bulletin of the history of medicine&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Bull Hist Med&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;eng&lt;/Language&gt;
-      &lt;ArticleTitle&gt;René Dubos and the capsular polysaccharide of pneumococcus: an oral history memoir.&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Benison&lt;/LastName&gt;
-          &lt;ForeName&gt;S&lt;/ForeName&gt;
-          &lt;Initials&gt;S&lt;/Initials&gt;
-        &lt;/Author&gt;
-      &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-  &lt;PubmedArticle PMID=&quot;13916&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Print&quot;&gt;0008-4018&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Print&quot;&gt;
-          &lt;Volume&gt;55&lt;/Volume&gt;
-          &lt;Issue&gt;1&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;Year&gt;1977&lt;/Year&gt;
-            &lt;Month&gt;Jan&lt;/Month&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Canadian journal of biochemistry&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Can J Biochem&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;eng&lt;/Language&gt;
-      &lt;ArticleTitle&gt;Characterization and substrate specificity of fumarylacetoacetate fumarylhydrolase.&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Mahuran&lt;/LastName&gt;
-          &lt;ForeName&gt;D J&lt;/ForeName&gt;
-          &lt;Initials&gt;DJ&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Angus&lt;/LastName&gt;
-          &lt;ForeName&gt;R H&lt;/ForeName&gt;
-          &lt;Initials&gt;RH&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Braun&lt;/LastName&gt;
-          &lt;ForeName&gt;C V&lt;/ForeName&gt;
-          &lt;Initials&gt;CV&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Sim&lt;/LastName&gt;
-          &lt;ForeName&gt;S S&lt;/ForeName&gt;
-          &lt;Initials&gt;SS&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Schmidt&lt;/LastName&gt;
-          &lt;ForeName&gt;D E&lt;/ForeName&gt;
-          &lt;Initials&gt;DE&lt;/Initials&gt;
-          &lt;Suffix&gt;Jr&lt;/Suffix&gt;
-        &lt;/Author&gt;
-      &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-  &lt;PubmedArticle PMID=&quot;17090&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Print&quot;&gt;0304-3959&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Print&quot;&gt;
-          &lt;Volume&gt;2&lt;/Volume&gt;
-          &lt;Issue&gt;3&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;Year&gt;1976&lt;/Year&gt;
-            &lt;Month&gt;Sep&lt;/Month&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Pain&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Pain&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;eng&lt;/Language&gt;
-      &lt;ArticleTitle&gt;A comprehensive treatment approach to chronic low back pain.&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Cairns&lt;/LastName&gt;
-          &lt;ForeName&gt;Douglas&lt;/ForeName&gt;
-          &lt;Initials&gt;D&lt;/Initials&gt;
-          &lt;AffiliationInfo&gt;
-            &lt;Affiliation&gt;Spine Center, Rancho Los Amigos Hospital, 7601 East Imperial Highway, Downey, Calif. 90242 U.S.A.&lt;/Affiliation&gt;
-          &lt;/AffiliationInfo&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Thomas&lt;/LastName&gt;
-          &lt;ForeName&gt;Lynn&lt;/ForeName&gt;
-          &lt;Initials&gt;L&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Mooney&lt;/LastName&gt;
-          &lt;ForeName&gt;Vert&lt;/ForeName&gt;
-          &lt;Initials&gt;V&lt;/Initials&gt;
-        &lt;/Author&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;LastName&gt;Pace&lt;/LastName&gt;
-          &lt;ForeName&gt;Blair J&lt;/ForeName&gt;
-          &lt;Initials&gt;BJ&lt;/Initials&gt;
-        &lt;/Author&gt;
-      &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-  &lt;PubmedArticle PMID=&quot;13696&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Electronic&quot;&gt;1539-3704&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Internet&quot;&gt;
-          &lt;Volume&gt;86&lt;/Volume&gt;
-          &lt;Issue&gt;2&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;Year&gt;1977&lt;/Year&gt;
-            &lt;Month&gt;Feb&lt;/Month&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Annals of internal medicine&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Ann Intern Med&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;eng&lt;/Language&gt;
-      &lt;ArticleTitle&gt;Bone marrow transplantation with intensive combination chemotherapy/radiation therapy (SCARI) in acute leukemia.&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-        &lt;Author ValidYN=&quot;Y&quot;&gt;
-          &lt;CollectiveName&gt;The UCLA Bone Marrow Transplantation Group&lt;/CollectiveName&gt;
-        &lt;/Author&gt;
-      &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-  &lt;PubmedArticle PMID=&quot;196&quot;&gt;
-    &lt;Article&gt;
-      &lt;Journal&gt;
-        &lt;ISSN IssnType=&quot;Electronic&quot;&gt;1539-3704&lt;/ISSN&gt;
-        &lt;JournalIssue CitedMedium=&quot;Internet&quot;&gt;
-          &lt;Volume&gt;86&lt;/Volume&gt;
-          &lt;Issue&gt;2&lt;/Issue&gt;
-          &lt;PubDate&gt;
-            &lt;Year&gt;1977&lt;/Year&gt;
-            &lt;Month&gt;Feb&lt;/Month&gt;
-          &lt;/PubDate&gt;
-        &lt;/JournalIssue&gt;
-        &lt;Title&gt;Annals of internal medicine&lt;/Title&gt;
-        &lt;ISOAbbreviation&gt;Ann Intern Med&lt;/ISOAbbreviation&gt;
-      &lt;/Journal&gt;
-      &lt;Language&gt;eng&lt;/Language&gt;
-      &lt;ArticleTitle&gt;Bone marrow transplantation with intensive combination chemotherapy/radiation therapy (SCARI) in acute leukemia.&lt;/ArticleTitle&gt;
-      &lt;AuthorList CompleteYN=&quot;Y&quot;&gt;
-            
-          &lt;/AuthorList&gt;
-    &lt;/Article&gt;
-  &lt;/PubmedArticle&gt;
-&lt;/PubmedArticleSet&gt; </code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2052,9 +1812,8 @@ Season.df &lt;- data.frame (
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyMnIpXG5wdWJEYXRlSGFzaG1hcCA8LSBoYXNobWFwKClcbmBgYCJ9 -->
-<pre class="r"><code>library(r2r)
-pubDateHashmap &lt;- hashmap()</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHViRGF0ZUhhc2htYXAgPC0gaGFzaG1hcCgpXG5gYGAifQ== -->
+<pre class="r"><code>pubDateHashmap &lt;- hashmap()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -2138,12 +1897,18 @@ it to the pubDateExists</p>
 <p>Function: parseJournalIssue</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFyc2VKb3VybmFsSXNzdWUgPC0gZnVuY3Rpb24oam91cm5hbElzc3VlKSB7XG4gIHBrLkpvdXJuYWxJc3N1ZSA8LSBucm93KEpvdXJuYWxJc3N1ZXMuZGYpICsgMVxuICB2b2x1bWUgPC0gam91cm5hbElzc3VlW1sxXV1cbiAgaXNzdWUgPC0gam91cm5hbElzc3VlW1syXV1cbiAgcHViRGF0ZSA8LSBqb3VybmFsSXNzdWVbWzNdXVxuICBKb3VybmFsSXNzdWVzLmRmW3BrLkpvdXJuYWxJc3N1ZSwgMV0gPDwtIHBrLkpvdXJuYWxJc3N1ZVxuICBKb3VybmFsSXNzdWVzLmRmW3BrLkpvdXJuYWxJc3N1ZSwgMl0gPDwtIHhtbFZhbHVlKHZvbHVtZSkgXG4gIEpvdXJuYWxJc3N1ZXMuZGZbcGsuSm91cm5hbElzc3VlLCAzXSA8PC0geG1sVmFsdWUoaXNzdWUpXG4gIEpvdXJuYWxJc3N1ZXMuZGZbcGsuSm91cm5hbElzc3VlLCA0XSA8PC0gcGFyc2VQdWJEYXRlKHB1YkRhdGUpXG4gIHJldHVybiAocGsuSm91cm5hbElzc3VlKVxufVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFyc2VKb3VybmFsSXNzdWUgPC0gZnVuY3Rpb24oam91cm5hbElzc3VlKSB7XG4gIHBrLkpvdXJuYWxJc3N1ZSA8LSBucm93KEpvdXJuYWxJc3N1ZXMuZGYpICsgMVxuICB2b2x1bWUgPC0geHBhdGhTQXBwbHkoam91cm5hbElzc3VlLCBcIi4vVm9sdW1lXCIsIHhtbFZhbHVlKVxuICBpc3N1ZSA8LSB4cGF0aFNBcHBseShqb3VybmFsSXNzdWUsIFwiLi9Jc3N1ZVwiLCB4bWxWYWx1ZSlcbiAgcHViRGF0ZSA8LSB4cGF0aFNBcHBseShqb3VybmFsSXNzdWUsIFwiLi9QdWJEYXRlXCIpXG4gIGlmIChsZW5ndGgodm9sdW1lKSA9PSAwKSB7XG4gICAgdm9sdW1lIDwtIFwiXCJcbiAgfVxuICBpZiAobGVuZ3RoKGlzc3VlKSA9PSAwKSB7XG4gICAgaXNzdWUgPC0gXCJcIlxuICB9XG4gIEpvdXJuYWxJc3N1ZXMuZGZbcGsuSm91cm5hbElzc3VlLCAxXSA8PC0gcGsuSm91cm5hbElzc3VlXG4gIEpvdXJuYWxJc3N1ZXMuZGZbcGsuSm91cm5hbElzc3VlLCAyXSA8PC0geG1sVmFsdWUodm9sdW1lKSBcbiAgSm91cm5hbElzc3Vlcy5kZltway5Kb3VybmFsSXNzdWUsIDNdIDw8LSB4bWxWYWx1ZShpc3N1ZSlcbiAgSm91cm5hbElzc3Vlcy5kZltway5Kb3VybmFsSXNzdWUsIDRdIDw8LSBwYXJzZVB1YkRhdGUocHViRGF0ZSlcbiAgcmV0dXJuIChway5Kb3VybmFsSXNzdWUpXG59XG5gYGAifQ== -->
 <pre class="r"><code>parseJournalIssue &lt;- function(journalIssue) {
   pk.JournalIssue &lt;- nrow(JournalIssues.df) + 1
-  volume &lt;- journalIssue[[1]]
-  issue &lt;- journalIssue[[2]]
-  pubDate &lt;- journalIssue[[3]]
+  volume &lt;- xpathSApply(journalIssue, &quot;./Volume&quot;, xmlValue)
+  issue &lt;- xpathSApply(journalIssue, &quot;./Issue&quot;, xmlValue)
+  pubDate &lt;- xpathSApply(journalIssue, &quot;./PubDate&quot;)
+  if (length(volume) == 0) {
+    volume &lt;- &quot;&quot;
+  }
+  if (length(issue) == 0) {
+    issue &lt;- &quot;&quot;
+  }
   JournalIssues.df[pk.JournalIssue, 1] &lt;&lt;- pk.JournalIssue
   JournalIssues.df[pk.JournalIssue, 2] &lt;&lt;- xmlValue(volume) 
   JournalIssues.df[pk.JournalIssue, 3] &lt;&lt;- xmlValue(issue)
@@ -2153,90 +1918,82 @@ it to the pubDateExists</p>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Function: parseJournals</p>
+<p>volume &lt;- xpathSApply(journalIssue, “./Volume”, xmlValue) Issue
+&lt;- xpathSApply(journalIssue, “./Issue”, xmlValue)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFyc2VKb3VybmFscyA8LSBmdW5jdGlvbihqb3VybmFsKSB7XG4gIG5ld0pvdXJuYWwuZGYgPC0gZGF0YS5mcmFtZSAoXG4gICAgICAgICAgICAgICAgICAgICAgICAgIElTU04gPSBjaGFyYWN0ZXIoKSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgSm91cm5hbElzc3VlSWQgPSBpbnRlZ2VyKCksXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFRpdGxlID0gY2hhcmFjdGVyKCksXG4gICAgICAgICAgICAgICAgICAgICAgICAgIElTT0FiYnJldmlhdGlvbiA9IGNoYXJhY3RlcigpLFxuICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJpbmdzQXNGYWN0b3JzID0gRlxuICAgICAgICAgICAgICAgICAgICAgICAgKVxuICBcbiAgSVNTTiA8LSBqb3VybmFsW1sxXV1cbiAgSm91cm5hbElzc3VlIDwtIGpvdXJuYWxbWzJdXVxuICBUaXRsZSA8LSBqb3VybmFsW1szXV1cbiAgSVNPQWJicmV2aWF0aW9uIDwtIGpvdXJuYWxbWzRdXVxuICBuZXdKb3VybmFsLmRmWzEsIDFdIDwtIHhtbFZhbHVlKElTU04pXG4gIG5ld0pvdXJuYWwuZGZbMSwgMl0gPC0gcGFyc2VKb3VybmFsSXNzdWUoSm91cm5hbElzc3VlKVxuICBuZXdKb3VybmFsLmRmWzEsIDNdIDwtIHhtbFZhbHVlKFRpdGxlKVxuICBuZXdKb3VybmFsLmRmWzEsIDRdIDwtIHhtbFZhbHVlKElTT0FiYnJldmlhdGlvbilcbiAgcmV0dXJuIChuZXdKb3VybmFsLmRmKVxufVxuYGBgIn0= -->
-<pre class="r"><code>parseJournals &lt;- function(journal) {
-  newJournal.df &lt;- data.frame (
-                          ISSN = character(),
-                          JournalIssueId = integer(),
-                          Title = character(),
-                          ISOAbbreviation = character(),
-                          stringsAsFactors = F
-                        )
-  
-  ISSN &lt;- journal[[1]]
-  JournalIssue &lt;- journal[[2]]
-  Title &lt;- journal[[3]]
-  ISOAbbreviation &lt;- journal[[4]]
-  newJournal.df[1, 1] &lt;- xmlValue(ISSN)
-  newJournal.df[1, 2] &lt;- parseJournalIssue(JournalIssue)
-  newJournal.df[1, 3] &lt;- xmlValue(Title)
-  newJournal.df[1, 4] &lt;- xmlValue(ISOAbbreviation)
-  return (newJournal.df)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyMnIpXG5qb3VybmFsSGFzaG1hcCA8LSBoYXNobWFwKClcbmBgYCJ9 -->
-<pre class="r"><code>library(r2r)
-journalHashmap &lt;- hashmap()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Function: journalExists Checks if it already exists in the passed
-data frame. Returns a key to the item if it exists, 0 otherwise and add
-it to the journalExists if a journal has the same ISSN， JournalIssue
-and Title, we treat then as the same journal</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuam91cm5hbGVFeGlzdHMgPC0gZnVuY3Rpb24oam91cm5hbEluZm8pIHtcbiAgcGsgPC0gcXVlcnkoam91cm5hbEhhc2htYXAsIGpvdXJuYWxJbmZvKVxuICBpZiAoaXMubnVsbChwaykpIHtcbiAgICBway5qb3VybmFsZSA8LSBucm93KEpvdXJuYWxzLmRmKSArIDFcbiAgICBpbnNlcnQoam91cm5hbEhhc2htYXAsIGpvdXJuYWxJbmZvLCBway5qb3VybmFsZSlcbiAgICByZXR1cm4gKDApXG4gIH0gZWxzZSB7XG4gICAgcmV0dXJuIChwaylcbiAgfVxufVxuYGBgIn0= -->
-<pre class="r"><code>journaleExists &lt;- function(journalInfo) {
-  pk &lt;- query(journalHashmap, journalInfo)
-  if (is.null(pk)) {
-    pk.journale &lt;- nrow(Journals.df) + 1
-    insert(journalHashmap, journalInfo, pk.journale)
-    return (0)
-  } else {
-    return (pk)
-  }
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVtQXJ0aWNsZXMgPC0geG1sU2l6ZShyb290KVxuZm9yIChtIGluIDEgOiBudW1BcnRpY2xlcykge1xuICBhcnRpY2xlIDwtIHJvb3RbW21dXVxuICBqb3VybmFsIDwtIGFydGljbGVbWzFdXVtbMV1dXG4gIG5ld0pvdXJuYWxzIDwtIHBhcnNlSm91cm5hbHMoam91cm5hbClcbiAgSVNTTiA8LSBuZXdKb3VybmFscyRJU1NOXG4gIEpvdXJuYWxJc3N1ZSA8LSBuZXdKb3VybmFscyRKb3VybmFsSXNzdWVJZFxuICBUaXRsZSA8LSBuZXdKb3VybmFscyRUaXRsZVxuICBqb3VybmFsSW5mbyA8LSBwYXN0ZShjKElTU04sIEpvdXJuYWxJc3N1ZSwgVGl0bGUpLCBjb2xsYXBzZSA9IFwiIFwiKVxuICBway5qb3VybmFsIDwtIGpvdXJuYWxlRXhpc3RzKGpvdXJuYWxJbmZvKVxuICBpZiAocGsuam91cm5hbCA9PSAwKSB7XG4gICAgIyBkb2VzIG5vdCBleGlzdCwgc28gYWRkXG4gICAgcGsuam91cm5hbCA8LSBucm93KEpvdXJuYWxzLmRmKSArIDFcbiAgICBKb3VybmFscy5kZltway5qb3VybmFsLCAyOm5jb2woSm91cm5hbHMuZGYpXSA8LSBuZXdKb3VybmFsc1sxLF1cbiAgICBKb3VybmFscy5kZltway5qb3VybmFsLCAxXSA8LSBway5qb3VybmFsXG4gIH1cbn1cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVtQXJ0aWNsZXMgPC0geG1sU2l6ZShyb290KVxuZm9yIChtIGluIDEgOiBudW1BcnRpY2xlcykge1xuICBhcnRpY2xlIDwtIHJvb3RbW21dXVxuICBKb3VybmFsIDwtIGFydGljbGVbWzFdXVtbMV1dXG4gIGlmICh4bWxOYW1lKEpvdXJuYWxbWzFdXSkgPT0gXCJKb3VybmFsSXNzdWVcIikge1xuICAgIGpvdXJuYWxJc3N1ZSA8LSBKb3VybmFsW1sxXV1cblxuICB9IGVsc2Uge1xuICAgIGpvdXJuYWxJc3N1ZSA8LSBKb3VybmFsW1syXV1cbiAgfVxuICBcbiAgcHJpbnQoam91cm5hbElzc3VlKVxufVxuYGBgIn0= -->
 <pre class="r"><code>numArticles &lt;- xmlSize(root)
 for (m in 1 : numArticles) {
   article &lt;- root[[m]]
-  journal &lt;- article[[1]][[1]]
-  newJournals &lt;- parseJournals(journal)
-  ISSN &lt;- newJournals$ISSN
-  JournalIssue &lt;- newJournals$JournalIssueId
-  Title &lt;- newJournals$Title
-  journalInfo &lt;- paste(c(ISSN, JournalIssue, Title), collapse = &quot; &quot;)
-  pk.journal &lt;- journaleExists(journalInfo)
-  if (pk.journal == 0) {
-    # does not exist, so add
-    pk.journal &lt;- nrow(Journals.df) + 1
-    Journals.df[pk.journal, 2:ncol(Journals.df)] &lt;- newJournals[1,]
-    Journals.df[pk.journal, 1] &lt;- pk.journal
+  Journal &lt;- article[[1]][[1]]
+  if (xmlName(Journal[[1]]) == &quot;JournalIssue&quot;) {
+    journalIssue &lt;- Journal[[1]]
+
+  } else {
+    journalIssue &lt;- Journal[[2]]
   }
+  
+  print(journalIssue)
 }</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gVXNlTWV0aG9kKFwieG1sTmFtZVwiLCBub2RlKSA6IFxuICBubyBhcHBsaWNhYmxlIG1ldGhvZCBmb3IgJ3htbE5hbWUnIGFwcGxpZWQgdG8gYW4gb2JqZWN0IG9mIGNsYXNzIFwiTlVMTFwiXG4ifQ== -->
-<pre><code>Error in UseMethod(&quot;xmlName&quot;, node) : 
-  no applicable method for &#39;xmlName&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiPEpvdXJuYWxJc3N1ZSBDaXRlZE1lZGl1bT1cIlByaW50XCI+XG4gIDxJc3N1ZT4xMTM8XC9Jc3N1ZT5cbiAgPFB1YkRhdGU+XG4gICAgPE1lZGxpbmVEYXRlPjE5NzUgTm92LURlYzxcL01lZGxpbmVEYXRlPlxuICA8XC9QdWJEYXRlPlxuPFwvSm91cm5hbElzc3VlPiBcbiJ9 -->
+<pre><code>&lt;JournalIssue CitedMedium=&quot;Print&quot;&gt;
+  &lt;Issue&gt;113&lt;/Issue&gt;
+  &lt;PubDate&gt;
+    &lt;MedlineDate&gt;1975 Nov-Dec&lt;/MedlineDate&gt;
+  &lt;/PubDate&gt;
+&lt;/JournalIssue&gt; </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>volume</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXJ0aWNsZSA8LSByb290W1sxXV1cbiAgSm91cm5hbCA8LSBhcnRpY2xlW1sxXV1bWzFdXVxuICBKb3VybmFsSXNzdWUgPC0gSm91cm5hbFtbMl1dXG4gICAgSXNzdWUgPC0geHBhdGhTQXBwbHkoam91cm5hbElzc3VlLCBcIi4vUHViRGF0ZVwiKVxuICAgIElzc3VlXG5gYGAifQ== -->
+<pre class="r"><code>article &lt;- root[[1]]
+  Journal &lt;- article[[1]][[1]]
+  JournalIssue &lt;- Journal[[2]]
+    Issue &lt;- xpathSApply(journalIssue, &quot;./PubDate&quot;)
+    Issue</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cbjxQdWJEYXRlPlxuICA8TWVkbGluZURhdGU+MTk3NSBOb3YtRGVjPFwvTWVkbGluZURhdGU+XG48XC9QdWJEYXRlPiBcbiJ9 -->
+<pre><code>[[1]]
+&lt;PubDate&gt;
+  &lt;MedlineDate&gt;1975 Nov-Dec&lt;/MedlineDate&gt;
+&lt;/PubDate&gt; </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUHViRGF0ZXMuZGZcbmBgYCJ9 -->
+<pre class="r"><code>PubDates.df</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MCwibmNvbCI6Niwic3VtbWFyeSI6W119LCJyZGYiOiJINHNJQUFBQUFBQUFBNFZRYlV2RE1CQyt2cVRhaWpMWTcyaHgrTVVmVUFRL0RNUVhtQjl2YlhSbE1SbHBpdnJucDVmdWdxd01ESVM3ZS9JOGQvZmtzVjdkRktzQ0FCSkk0d2dTUVNtSWwrZTc4aFlJb1NLQ0ZISWZ2NGcwcHlTamV3bUhNL3NuTXUrb2tkRDRJWHNtWlF6bUQ4TzZSaWZ2V3diU1Y0azJLSlpHdXcwWFNZM2ZuRjRzWmFzNkxiMlFvZk1uaWIzUjFPWjRhRzdOWnhVR245eXFVZGlIclFKWXRPaXdlck9rbzJvL2taeVpuZXVNSmxIcy8wVk14SkdkQUxOQit3M2FzdGtNZWxzdXJ2MkU4ZjN2czZaNWRwZ1ovM0F2d2IweXFkL0plVmhlNFZvcUxxN0k2dWkwMnRsT3UyQ0YwTDV5eG1IZ0ZZMVJBUm5Od2Y0WE5iT1NoUThDQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["PubDateId"],"name":[1],"type":["int"],"align":["right"]},{"label":["Year"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Month"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Day"],"name":[4],"type":["chr"],"align":["left"]},{"label":["MedlineDate"],"name":[5],"type":["chr"],"align":["left"]},{"label":["SeasonId"],"name":[6],"type":["int"],"align":["right"]}],"data":[],"options":{"columns":{"min":{},"max":[10],"total":[6]},"rows":{"min":[10],"max":[10],"total":[0]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuSm91cm5hbElzc3Vlcy5kZlxuYGBgIn0= -->
+<pre class="r"><code>JournalIssues.df</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MCwibmNvbCI6NCwic3VtbWFyeSI6W119LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRMjBvRE1SQ2QzU2JLTGxRS2ZzY3VhRi84Z0NLMFR5SXFmVTEzMDdvMFRVb3U2TmRYSjl1TTB0QkFtSm1UT1hOeTVuV3hudGZyR2dBbXdNb0NKaHhUNE85dno4MFRJSUpGQVF5cUdMK3g2UjRUaG5jSzV6UExZc0l2aUZ5TGczU3BpU1h3Ym1XQzFVSXRuUXR5MlNmMDVzT29jSkJFSEI5VFViMkV6VUw0MkhzNXZyTG1xeVdKcS9xZEVvNzBDYXg3NFVXN3RjakQ2cFJSYnMzUkQwWWpxWXlPZVVZdWJBYk1nbzQvNkp2dU0raDk4L0FZRmNiMy83WGtPVHRybGo5cEZxY2RTTDBiOU44T2xOaElSVXREcTZQVDltZ0g3Y2tLb3E3MXhndnFxenVqQ0JuTndla1hWNmwvYStrQkFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["JournalIssueId"],"name":[1],"type":["int"],"align":["right"]},{"label":["Volume"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Issue"],"name":[3],"type":["chr"],"align":["left"]},{"label":["PubDateId"],"name":[4],"type":["int"],"align":["right"]}],"data":[],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[0]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKeG1sZm4gPC0gInB1Ym1lZC10Zm0teG1sL3B1Ym1lZDIybjAwMDEtdGYueG1sIgp4bWxmbiA8LSAicHVibWVkLXRmbS14bWwvc2FtcGxlRGF0YS54bWwiCgpgYGB7cn0KbGlicmFyeShYTUwpCmxpYnJhcnkocjJyKQpgYGAKCmBgYHtyfQp4bWxmbiA8LSAicHVibWVkLXRmbS14bWwvc2FtcGxlRGF0YS54bWwiCnhtbERPTSA8LSB4bWxQYXJzZSh4bWxmbiwgdmFsaWRhdGU9VCkKcm9vdCA8LSB4bWxSb290KHhtbERPTSkKcm9vdApgYGAKCmBgYHtyfQpKb3VybmFscy5kZiA8LSBkYXRhLmZyYW1lICgKICAgICAgICAgICAgICAgICAgICAgICAgICBKb3VybmFsc0lkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIElTU04gPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBKb3VybmFsSXNzdWVJZCA9IGludGVnZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBUaXRsZSA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIElTT0FiYnJldmlhdGlvbiA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3NBc0ZhY3RvcnMgPSBGCiAgICAgICAgICAgICAgICAgICAgICAgICkKCkpvdXJuYWxJc3N1ZXMuZGYgPC0gZGF0YS5mcmFtZSAoCiAgICAgICAgICAgICAgICAgICAgICAgICAgSm91cm5hbElzc3VlSWQgPSBpbnRlZ2VyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgVm9sdW1lID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgSXNzdWUgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBQdWJEYXRlSWQgPSBpbnRlZ2VyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEYKICAgICAgICAgICAgICAgICAgICAgICAgKQoKUHViRGF0ZXMuZGYgPC0gZGF0YS5mcmFtZSAoCiAgICAgICAgICAgICAgICAgICAgICAgICAgUHViRGF0ZUlkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIFllYXIgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBNb250aCA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIERheSA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIE1lZGxpbmVEYXRlID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgU2Vhc29uSWQgPSBpbnRlZ2VyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEYKICAgICAgICAgICAgICAgICAgICAgICAgKQoKU2Vhc29uLmRmIDwtIGRhdGEuZnJhbWUgKAogICAgICAgICAgICAgICAgICAgICAgICAgIFNlYXNvbklkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIFNlYXNvbk5hbWUgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJpbmdzQXNGYWN0b3JzID0gRgogICAgICAgICAgICAgICAgICAgICAgICApCgpgYGAKCmBgYHtyfQoKcHViRGF0ZUhhc2htYXAgPC0gaGFzaG1hcCgpCmBgYAoKRnVuY3Rpb246IHB1YkRhdGVFeGlzdHMKQ2hlY2tzIGlmIGl0IGFscmVhZHkgZXhpc3RzIGluIHRoZSBwYXNzZWQgZGF0YSBmcmFtZS4gUmV0dXJucyBhIGtleSB0byB0aGUgaXRlbSBpZiBpdCBleGlzdHMsIDAgb3RoZXJ3aXNlIGFuZCBhZGQgaXQgdG8gdGhlIHB1YkRhdGVFeGlzdHMKYGBge3J9CnB1YkRhdGVFeGlzdHMgPC0gZnVuY3Rpb24oZGF0ZSkgewogIHBrIDwtIHF1ZXJ5KHB1YkRhdGVIYXNobWFwLCBkYXRlKQogIGlmIChpcy5udWxsKHBrKSkgewogICAgcGsuZGF0ZSA8LSBucm93KFB1YkRhdGVzLmRmKSArIDEKICAgIGluc2VydChwdWJEYXRlSGFzaG1hcCwgZGF0ZSwgcGsuZGF0ZSkKICAgIHJldHVybiAoMCkKICB9IGVsc2UgewogICAgcmV0dXJuIChwaykKICB9Cn0KYGBgCgpGdW5jdGlvbjpwYXJzZVB1YkRhdGUKYGBge3J9CnBhcnNlUHViRGF0ZSA8LSBmdW5jdGlvbihwdWJEYXRlKSB7CiAgbmV3UHViRGF0ZS5kZiA8LSBkYXRhLmZyYW1lICgKICAgICAgICAgICAgICAgICAgICAgICAgICBZZWFyID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgTW9udGggPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBEYXkgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBNZWRsaW5lRGF0ZSA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIFNlYXNvbklkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3NBc0ZhY3RvcnMgPSBGCiAgICAgICAgICAgICAgICAgICAgICAgICkKICAKICBuU2l6ZSA8LSB4bWxTaXplKFB1YkRhdGUpCiAgZm9yIChtIGluIDEgOiBuU2l6ZSkgewogICAgdmFsdWUgPC0geG1sVmFsdWUocHViRGF0ZVtbbV1dKQogICAgbmFtZSA8LSB4bWxOYW1lKHB1YkRhdGVbW21dXSkKICAgIGlmIChuYW1lID09ICJZZWFyIikgewogICAgICBuZXdQdWJEYXRlLmRmWzEsIDFdIDwtIHZhbHVlCiAgICB9IGVsc2UgaWYgKG5hbWUgPT0gIk1vbnRoIikgewogICAgICBuZXdQdWJEYXRlLmRmWzEsIDJdIDwtIHZhbHVlCiAgICB9IGVsc2UgaWYgKG5hbWUgPT0gIkRheSIpIHsKICAgICAgbmV3UHViRGF0ZS5kZlsxLCAzXSA8LSB2YWx1ZQogICAgfSBlbHNlIGlmIChuYW1lID09ICJNZWRsaW5lRGF0ZSIpIHsKICAgICAgbmV3UHViRGF0ZS5kZlsxLCA0XSA8LSB2YWx1ZQogICAgfSBlbHNlIGlmIChuYW1lID09ICJTZWFzb24iKSB7CiAgICAgICMgSWYgc2Vhc29uIGhhcyBhbHJlYWR5IGV4aXN0cyBpbiBTZWFzb24uZGYsIHRoZW4gcmV0dXJuIHRoZSBwaywgb3RoZXJ3aXNlLCBhZGQgc2Vhc29uIHRvIHRoZSBkYXRhIGZyYW1lCiAgICAgIGV4aXN0IDwtIGVsZW1lbnRFeGlzdHModmFsdWUsIFNlYXNvbi5kZikKICAgICAgaWYgKGV4aXN0ID09IDApIHsKICAgICAgICBway5TZWFzb24gPC0gbnJvdyhTZWFzb24uZGYpICsgMQogICAgICAgIFNlYXNvbi5kZltway5TZWFzb24sIDJdIDw8LSB2YWx1ZQogICAgICAgIFNlYXNvbi5kZltway5TZWFzb24sIDFdIDw8LSBway5TZWFzb24KICAgICAgICBuZXdQdWJEYXRlLmRmWzEsIDVdIDwtIHBrLlNlYXNvbgogICAgICB9IGVsc2UgewogICAgICAgIG5ld1B1YkRhdGUuZGZbMSwgNV0gPC0gZXhpc3QKICAgICAgfQogICAgICAKICAgIH0KICB9CiAgIyBDaGVjayBpZiB0aGUgcHViRGF0ZSBoYXMgYWxyZWFkeSBleGlzdHMgaW4gUHViRGF0ZXMuZGYsIHRoZW4gcmV0dXJuIHBrICh1c2luZyBoYXNobWFwIHRvIGxvb2sgZm9yIHZhbHVlKSwgb3RoZXJ3aXNlIGFkZCBuZXdQdWJEYXRlLmRmIHRvIFB1YkRhdGVzLmRmIGFuZCByZXR1cm4gbmV3IHBrCiAgeWVhciA8LSBuZXdQdWJEYXRlLmRmJFllYXIKICBtb250aCA8LSBuZXdQdWJEYXRlLmRmJE1vbnRoCiAgZGF5IDwtIG5ld1B1YkRhdGUuZGYkRGF5CiAgZGF0ZSA8LSBwYXN0ZSh5ZWFyLCAiICIsIG1vbnRoLCAiICIsIGRheSkKICBway5kYXRlIDwtIHB1YkRhdGVFeGlzdHMoZGF0ZSkKICBpZiAocGsuZGF0ZSA9PSAwKSB7CiAgICAjIGRvZXMgbm90IGV4aXN0LCBzbyBhZGQKICAgIHBrLmRhdGUgPC0gbnJvdyhQdWJEYXRlcy5kZikgKyAxCiAgICBQdWJEYXRlcy5kZltway5kYXRlLDI6bmNvbChQdWJEYXRlcy5kZildIDw8LSBuZXdQdWJEYXRlLmRmWzEsXQogICAgUHViRGF0ZXMuZGZbcGsuZGF0ZSwxXSA8PC0gcGsuZGF0ZQogICAgCiAgfQogIHJldHVybiAocGsuZGF0ZSkKfQpgYGAKCkZ1bmN0aW9uOiBwYXJzZUpvdXJuYWxJc3N1ZQpgYGB7cn0KcGFyc2VKb3VybmFsSXNzdWUgPC0gZnVuY3Rpb24oam91cm5hbElzc3VlKSB7CiAgcGsuSm91cm5hbElzc3VlIDwtIG5yb3coSm91cm5hbElzc3Vlcy5kZikgKyAxCiAgdm9sdW1lIDwtIGpvdXJuYWxJc3N1ZVtbMV1dCiAgaXNzdWUgPC0gam91cm5hbElzc3VlW1syXV0KICBwdWJEYXRlIDwtIGpvdXJuYWxJc3N1ZVtbM11dCiAgSm91cm5hbElzc3Vlcy5kZltway5Kb3VybmFsSXNzdWUsIDFdIDw8LSBway5Kb3VybmFsSXNzdWUKICBKb3VybmFsSXNzdWVzLmRmW3BrLkpvdXJuYWxJc3N1ZSwgMl0gPDwtIHhtbFZhbHVlKHZvbHVtZSkgCiAgSm91cm5hbElzc3Vlcy5kZltway5Kb3VybmFsSXNzdWUsIDNdIDw8LSB4bWxWYWx1ZShpc3N1ZSkKICBKb3VybmFsSXNzdWVzLmRmW3BrLkpvdXJuYWxJc3N1ZSwgNF0gPDwtIHBhcnNlUHViRGF0ZShwdWJEYXRlKQogIHJldHVybiAocGsuSm91cm5hbElzc3VlKQp9CmBgYAoKRnVuY3Rpb246IHBhcnNlSm91cm5hbHMKYGBge3J9CnBhcnNlSm91cm5hbHMgPC0gZnVuY3Rpb24oam91cm5hbCkgewogIG5ld0pvdXJuYWwuZGYgPC0gZGF0YS5mcmFtZSAoCiAgICAgICAgICAgICAgICAgICAgICAgICAgSVNTTiA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIEpvdXJuYWxJc3N1ZUlkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIFRpdGxlID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgSVNPQWJicmV2aWF0aW9uID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEYKICAgICAgICAgICAgICAgICAgICAgICAgKQogIAogIElTU04gPC0gam91cm5hbFtbMV1dCiAgSm91cm5hbElzc3VlIDwtIGpvdXJuYWxbWzJdXQogIFRpdGxlIDwtIGpvdXJuYWxbWzNdXQogIElTT0FiYnJldmlhdGlvbiA8LSBqb3VybmFsW1s0XV0KICBuZXdKb3VybmFsLmRmWzEsIDFdIDwtIHhtbFZhbHVlKElTU04pCiAgbmV3Sm91cm5hbC5kZlsxLCAyXSA8LSBwYXJzZUpvdXJuYWxJc3N1ZShKb3VybmFsSXNzdWUpCiAgbmV3Sm91cm5hbC5kZlsxLCAzXSA8LSB4bWxWYWx1ZShUaXRsZSkKICBuZXdKb3VybmFsLmRmWzEsIDRdIDwtIHhtbFZhbHVlKElTT0FiYnJldmlhdGlvbikKICByZXR1cm4gKG5ld0pvdXJuYWwuZGYpCn0KYGBgCgpgYGB7cn0KbGlicmFyeShyMnIpCmpvdXJuYWxIYXNobWFwIDwtIGhhc2htYXAoKQpgYGAKCkZ1bmN0aW9uOiBqb3VybmFsRXhpc3RzCkNoZWNrcyBpZiBpdCBhbHJlYWR5IGV4aXN0cyBpbiB0aGUgcGFzc2VkIGRhdGEgZnJhbWUuIFJldHVybnMgYSBrZXkgdG8gdGhlIGl0ZW0gaWYgaXQgZXhpc3RzLCAwIG90aGVyd2lzZSBhbmQgYWRkIGl0IHRvIHRoZSBqb3VybmFsRXhpc3RzCmlmIGEgam91cm5hbCBoYXMgdGhlIHNhbWUgSVNTTu+8jCBKb3VybmFsSXNzdWUgYW5kIFRpdGxlLCB3ZSB0cmVhdCB0aGVuIGFzIHRoZSBzYW1lIGpvdXJuYWwKYGBge3J9CmpvdXJuYWxlRXhpc3RzIDwtIGZ1bmN0aW9uKGpvdXJuYWxJbmZvKSB7CiAgcGsgPC0gcXVlcnkoam91cm5hbEhhc2htYXAsIGpvdXJuYWxJbmZvKQogIGlmIChpcy5udWxsKHBrKSkgewogICAgcGsuam91cm5hbGUgPC0gbnJvdyhKb3VybmFscy5kZikgKyAxCiAgICBpbnNlcnQoam91cm5hbEhhc2htYXAsIGpvdXJuYWxJbmZvLCBway5qb3VybmFsZSkKICAgIHJldHVybiAoMCkKICB9IGVsc2UgewogICAgcmV0dXJuIChwaykKICB9Cn0KYGBgCgoKYGBge3J9Cm51bUFydGljbGVzIDwtIHhtbFNpemUocm9vdCkKZm9yIChtIGluIDEgOiBudW1BcnRpY2xlcykgewogIGFydGljbGUgPC0gcm9vdFtbbV1dCiAgam91cm5hbCA8LSBhcnRpY2xlW1sxXV1bWzFdXQogIG5ld0pvdXJuYWxzIDwtIHBhcnNlSm91cm5hbHMoam91cm5hbCkKICBJU1NOIDwtIG5ld0pvdXJuYWxzJElTU04KICBKb3VybmFsSXNzdWUgPC0gbmV3Sm91cm5hbHMkSm91cm5hbElzc3VlSWQKICBUaXRsZSA8LSBuZXdKb3VybmFscyRUaXRsZQogIGpvdXJuYWxJbmZvIDwtIHBhc3RlKGMoSVNTTiwgSm91cm5hbElzc3VlLCBUaXRsZSksIGNvbGxhcHNlID0gIiAiKQogIHBrLmpvdXJuYWwgPC0gam91cm5hbGVFeGlzdHMoam91cm5hbEluZm8pCiAgaWYgKHBrLmpvdXJuYWwgPT0gMCkgewogICAgIyBkb2VzIG5vdCBleGlzdCwgc28gYWRkCiAgICBway5qb3VybmFsIDwtIG5yb3coSm91cm5hbHMuZGYpICsgMQogICAgSm91cm5hbHMuZGZbcGsuam91cm5hbCwgMjpuY29sKEpvdXJuYWxzLmRmKV0gPC0gbmV3Sm91cm5hbHNbMSxdCiAgICBKb3VybmFscy5kZltway5qb3VybmFsLCAxXSA8LSBway5qb3VybmFsCiAgfQp9CgpgYGAKCgoKCgoKCgoKCgoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKeG1sZm4gPC0gInB1Ym1lZC10Zm0teG1sL3B1Ym1lZDIybjAwMDEtdGYueG1sIgp4bWxmbiA8LSAicHVibWVkLXRmbS14bWwvc2FtcGxlRGF0YS54bWwiCgpgYGB7cn0KbGlicmFyeShYTUwpCmxpYnJhcnkocjJyKQpgYGAKCmBgYHtyfQp4bWxmbiA8LSAicHVibWVkLXRmbS14bWwvc2FtcGxlRGF0YS54bWwiCnhtbERPTSA8LSB4bWxQYXJzZSh4bWxmbiwgdmFsaWRhdGU9VCkKcm9vdCA8LSB4bWxSb290KHhtbERPTSkKYGBgCgpgYGB7cn0KSm91cm5hbHMuZGYgPC0gZGF0YS5mcmFtZSAoCiAgICAgICAgICAgICAgICAgICAgICAgICAgSm91cm5hbHNJZCA9IGludGVnZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBJU1NOID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgSm91cm5hbElzc3VlSWQgPSBpbnRlZ2VyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgVGl0bGUgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBJU09BYmJyZXZpYXRpb24gPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJpbmdzQXNGYWN0b3JzID0gRgogICAgICAgICAgICAgICAgICAgICAgICApCgpKb3VybmFsSXNzdWVzLmRmIDwtIGRhdGEuZnJhbWUgKAogICAgICAgICAgICAgICAgICAgICAgICAgIEpvdXJuYWxJc3N1ZUlkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIFZvbHVtZSA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIElzc3VlID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgUHViRGF0ZUlkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3NBc0ZhY3RvcnMgPSBGCiAgICAgICAgICAgICAgICAgICAgICAgICkKClB1YkRhdGVzLmRmIDwtIGRhdGEuZnJhbWUgKAogICAgICAgICAgICAgICAgICAgICAgICAgIFB1YkRhdGVJZCA9IGludGVnZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBZZWFyID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgTW9udGggPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBEYXkgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBNZWRsaW5lRGF0ZSA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIFNlYXNvbklkID0gaW50ZWdlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3NBc0ZhY3RvcnMgPSBGCiAgICAgICAgICAgICAgICAgICAgICAgICkKClNlYXNvbi5kZiA8LSBkYXRhLmZyYW1lICgKICAgICAgICAgICAgICAgICAgICAgICAgICBTZWFzb25JZCA9IGludGVnZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBTZWFzb25OYW1lID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEYKICAgICAgICAgICAgICAgICAgICAgICAgKQoKYGBgCgpgYGB7cn0KcHViRGF0ZUhhc2htYXAgPC0gaGFzaG1hcCgpCmBgYAoKRnVuY3Rpb246IHB1YkRhdGVFeGlzdHMKQ2hlY2tzIGlmIGl0IGFscmVhZHkgZXhpc3RzIGluIHRoZSBwYXNzZWQgZGF0YSBmcmFtZS4gUmV0dXJucyBhIGtleSB0byB0aGUgaXRlbSBpZiBpdCBleGlzdHMsIDAgb3RoZXJ3aXNlIGFuZCBhZGQgaXQgdG8gdGhlIHB1YkRhdGVFeGlzdHMKYGBge3J9CnB1YkRhdGVFeGlzdHMgPC0gZnVuY3Rpb24oZGF0ZSkgewogIHBrIDwtIHF1ZXJ5KHB1YkRhdGVIYXNobWFwLCBkYXRlKQogIGlmIChpcy5udWxsKHBrKSkgewogICAgcGsuZGF0ZSA8LSBucm93KFB1YkRhdGVzLmRmKSArIDEKICAgIGluc2VydChwdWJEYXRlSGFzaG1hcCwgZGF0ZSwgcGsuZGF0ZSkKICAgIHJldHVybiAoMCkKICB9IGVsc2UgewogICAgcmV0dXJuIChwaykKICB9Cn0KYGBgCgoKRnVuY3Rpb246cGFyc2VQdWJEYXRlCmBgYHtyfQpwYXJzZVB1YkRhdGUgPC0gZnVuY3Rpb24ocHViRGF0ZSkgewogIG5ld1B1YkRhdGUuZGYgPC0gZGF0YS5mcmFtZSAoCiAgICAgICAgICAgICAgICAgICAgICAgICAgWWVhciA9IGNoYXJhY3RlcigpLAogICAgICAgICAgICAgICAgICAgICAgICAgIE1vbnRoID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgRGF5ID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgICAgTWVkbGluZURhdGUgPSBjaGFyYWN0ZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBTZWFzb25JZCA9IGludGVnZXIoKSwKICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJpbmdzQXNGYWN0b3JzID0gRgogICAgICAgICAgICAgICAgICAgICAgICApCiAgCiAgblNpemUgPC0geG1sU2l6ZShQdWJEYXRlKQogIGZvciAobSBpbiAxIDogblNpemUpIHsKICAgIHZhbHVlIDwtIHhtbFZhbHVlKHB1YkRhdGVbW21dXSkKICAgIG5hbWUgPC0geG1sTmFtZShwdWJEYXRlW1ttXV0pCiAgICBpZiAobmFtZSA9PSAiWWVhciIpIHsKICAgICAgbmV3UHViRGF0ZS5kZlsxLCAxXSA8LSB2YWx1ZQogICAgfSBlbHNlIGlmIChuYW1lID09ICJNb250aCIpIHsKICAgICAgbmV3UHViRGF0ZS5kZlsxLCAyXSA8LSB2YWx1ZQogICAgfSBlbHNlIGlmIChuYW1lID09ICJEYXkiKSB7CiAgICAgIG5ld1B1YkRhdGUuZGZbMSwgM10gPC0gdmFsdWUKICAgIH0gZWxzZSBpZiAobmFtZSA9PSAiTWVkbGluZURhdGUiKSB7CiAgICAgIG5ld1B1YkRhdGUuZGZbMSwgNF0gPC0gdmFsdWUKICAgIH0gZWxzZSBpZiAobmFtZSA9PSAiU2Vhc29uIikgewogICAgICAjIElmIHNlYXNvbiBoYXMgYWxyZWFkeSBleGlzdHMgaW4gU2Vhc29uLmRmLCB0aGVuIHJldHVybiB0aGUgcGssIG90aGVyd2lzZSwgYWRkIHNlYXNvbiB0byB0aGUgZGF0YSBmcmFtZQogICAgICBleGlzdCA8LSBlbGVtZW50RXhpc3RzKHZhbHVlLCBTZWFzb24uZGYpCiAgICAgIGlmIChleGlzdCA9PSAwKSB7CiAgICAgICAgcGsuU2Vhc29uIDwtIG5yb3coU2Vhc29uLmRmKSArIDEKICAgICAgICBTZWFzb24uZGZbcGsuU2Vhc29uLCAyXSA8PC0gdmFsdWUKICAgICAgICBTZWFzb24uZGZbcGsuU2Vhc29uLCAxXSA8PC0gcGsuU2Vhc29uCiAgICAgICAgbmV3UHViRGF0ZS5kZlsxLCA1XSA8LSBway5TZWFzb24KICAgICAgfSBlbHNlIHsKICAgICAgICBuZXdQdWJEYXRlLmRmWzEsIDVdIDwtIGV4aXN0CiAgICAgIH0KICAgICAgCiAgICB9CiAgfQogICMgQ2hlY2sgaWYgdGhlIHB1YkRhdGUgaGFzIGFscmVhZHkgZXhpc3RzIGluIFB1YkRhdGVzLmRmLCB0aGVuIHJldHVybiBwayAodXNpbmcgaGFzaG1hcCB0byBsb29rIGZvciB2YWx1ZSksIG90aGVyd2lzZSBhZGQgbmV3UHViRGF0ZS5kZiB0byBQdWJEYXRlcy5kZiBhbmQgcmV0dXJuIG5ldyBwawogIHllYXIgPC0gbmV3UHViRGF0ZS5kZiRZZWFyCiAgbW9udGggPC0gbmV3UHViRGF0ZS5kZiRNb250aAogIGRheSA8LSBuZXdQdWJEYXRlLmRmJERheQogIGRhdGUgPC0gcGFzdGUoeWVhciwgIiAiLCBtb250aCwgIiAiLCBkYXkpCiAgcGsuZGF0ZSA8LSBwdWJEYXRlRXhpc3RzKGRhdGUpCiAgaWYgKHBrLmRhdGUgPT0gMCkgewogICAgIyBkb2VzIG5vdCBleGlzdCwgc28gYWRkCiAgICBway5kYXRlIDwtIG5yb3coUHViRGF0ZXMuZGYpICsgMQogICAgUHViRGF0ZXMuZGZbcGsuZGF0ZSwyOm5jb2woUHViRGF0ZXMuZGYpXSA8PC0gbmV3UHViRGF0ZS5kZlsxLF0KICAgIFB1YkRhdGVzLmRmW3BrLmRhdGUsMV0gPDwtIHBrLmRhdGUKICAgIAogIH0KICByZXR1cm4gKHBrLmRhdGUpCn0KYGBgCgpGdW5jdGlvbjogcGFyc2VKb3VybmFsSXNzdWUKYGBge3J9CnBhcnNlSm91cm5hbElzc3VlIDwtIGZ1bmN0aW9uKGpvdXJuYWxJc3N1ZSkgewogIHBrLkpvdXJuYWxJc3N1ZSA8LSBucm93KEpvdXJuYWxJc3N1ZXMuZGYpICsgMQogIHZvbHVtZSA8LSB4cGF0aFNBcHBseShqb3VybmFsSXNzdWUsICIuL1ZvbHVtZSIsIHhtbFZhbHVlKQogIGlzc3VlIDwtIHhwYXRoU0FwcGx5KGpvdXJuYWxJc3N1ZSwgIi4vSXNzdWUiLCB4bWxWYWx1ZSkKICBwdWJEYXRlIDwtIHhwYXRoU0FwcGx5KGpvdXJuYWxJc3N1ZSwgIi4vUHViRGF0ZSIpCiAgaWYgKGxlbmd0aCh2b2x1bWUpID09IDApIHsKICAgIHZvbHVtZSA8LSAiIgogIH0KICBpZiAobGVuZ3RoKGlzc3VlKSA9PSAwKSB7CiAgICBpc3N1ZSA8LSAiIgogIH0KICBKb3VybmFsSXNzdWVzLmRmW3BrLkpvdXJuYWxJc3N1ZSwgMV0gPDwtIHBrLkpvdXJuYWxJc3N1ZQogIEpvdXJuYWxJc3N1ZXMuZGZbcGsuSm91cm5hbElzc3VlLCAyXSA8PC0gdm9sdW1lIAogIEpvdXJuYWxJc3N1ZXMuZGZbcGsuSm91cm5hbElzc3VlLCAzXSA8PC0gaXNzdWUKICBKb3VybmFsSXNzdWVzLmRmW3BrLkpvdXJuYWxJc3N1ZSwgNF0gPDwtIHBhcnNlUHViRGF0ZShwdWJEYXRlKQogIHJldHVybiAocGsuSm91cm5hbElzc3VlKQp9CmBgYAoKdm9sdW1lIDwtIHhwYXRoU0FwcGx5KGpvdXJuYWxJc3N1ZSwgIi4vVm9sdW1lIiwgeG1sVmFsdWUpCiAgICBJc3N1ZSA8LSB4cGF0aFNBcHBseShqb3VybmFsSXNzdWUsICIuL0lzc3VlIiwgeG1sVmFsdWUpCiAgICAKICAgIApgYGB7cn0KbnVtQXJ0aWNsZXMgPC0geG1sU2l6ZShyb290KQpmb3IgKG0gaW4gMSA6IG51bUFydGljbGVzKSB7CiAgYXJ0aWNsZSA8LSByb290W1ttXV0KICBKb3VybmFsIDwtIGFydGljbGVbWzFdXVtbMV1dCiAgaWYgKHhtbE5hbWUoSm91cm5hbFtbMV1dKSA9PSAiSm91cm5hbElzc3VlIikgewogICAgam91cm5hbElzc3VlIDwtIEpvdXJuYWxbWzFdXQoKICB9IGVsc2UgewogICAgam91cm5hbElzc3VlIDwtIEpvdXJuYWxbWzJdXQogIH0KICAKICBwcmludChqb3VybmFsSXNzdWUpCn0KYGBgCgoKCgoKdm9sdW1lCgpgYGB7cn0KYXJ0aWNsZSA8LSByb290W1sxXV0KICBKb3VybmFsIDwtIGFydGljbGVbWzFdXVtbMV1dCiAgSm91cm5hbElzc3VlIDwtIEpvdXJuYWxbWzJdXQogICAgSXNzdWUgPC0geHBhdGhTQXBwbHkoam91cm5hbElzc3VlLCAiLi9QdWJEYXRlIikKICAgIElzc3VlCmBgYAoKYGBge3J9ClB1YkRhdGVzLmRmCmBgYApgYGB7cn0KSm91cm5hbElzc3Vlcy5kZgpgYGAKCgo=</div>
 
 
 
@@ -2283,7 +2040,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("JournalsParse.Rmd");
+  window.initializeSourceEmbed("JournalParseUpdate.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

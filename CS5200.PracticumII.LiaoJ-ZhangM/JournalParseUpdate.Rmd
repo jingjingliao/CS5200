@@ -15,7 +15,6 @@ library(r2r)
 xmlfn <- "pubmed-tfm-xml/sampleData.xml"
 xmlDOM <- xmlParse(xmlfn, validate=T)
 root <- xmlRoot(xmlDOM)
-root
 ```
 
 ```{r}
@@ -55,7 +54,6 @@ Season.df <- data.frame (
 ```
 
 ```{r}
-
 pubDateHashmap <- hashmap()
 ```
 
@@ -73,6 +71,7 @@ pubDateExists <- function(date) {
   }
 }
 ```
+
 
 Function:parsePubDate
 ```{r}
@@ -133,93 +132,62 @@ Function: parseJournalIssue
 ```{r}
 parseJournalIssue <- function(journalIssue) {
   pk.JournalIssue <- nrow(JournalIssues.df) + 1
-  volume <- journalIssue[[1]]
-  issue <- journalIssue[[2]]
-  pubDate <- journalIssue[[3]]
+  volume <- xpathSApply(journalIssue, "./Volume", xmlValue)
+  issue <- xpathSApply(journalIssue, "./Issue", xmlValue)
+  pubDate <- xpathSApply(journalIssue, "./PubDate")
+  if (length(volume) == 0) {
+    volume <- ""
+  }
+  if (length(issue) == 0) {
+    issue <- ""
+  }
   JournalIssues.df[pk.JournalIssue, 1] <<- pk.JournalIssue
-  JournalIssues.df[pk.JournalIssue, 2] <<- xmlValue(volume) 
-  JournalIssues.df[pk.JournalIssue, 3] <<- xmlValue(issue)
+  JournalIssues.df[pk.JournalIssue, 2] <<- volume 
+  JournalIssues.df[pk.JournalIssue, 3] <<- issue
   JournalIssues.df[pk.JournalIssue, 4] <<- parsePubDate(pubDate)
   return (pk.JournalIssue)
 }
 ```
 
-Function: parseJournals
-```{r}
-parseJournals <- function(journal) {
-  newJournal.df <- data.frame (
-                          ISSN = character(),
-                          JournalIssueId = integer(),
-                          Title = character(),
-                          ISOAbbreviation = character(),
-                          stringsAsFactors = F
-                        )
-  
-  ISSN <- journal[[1]]
-  JournalIssue <- journal[[2]]
-  Title <- journal[[3]]
-  ISOAbbreviation <- journal[[4]]
-  newJournal.df[1, 1] <- xmlValue(ISSN)
-  newJournal.df[1, 2] <- parseJournalIssue(JournalIssue)
-  newJournal.df[1, 3] <- xmlValue(Title)
-  newJournal.df[1, 4] <- xmlValue(ISOAbbreviation)
-  return (newJournal.df)
-}
-```
-
-```{r}
-library(r2r)
-journalHashmap <- hashmap()
-```
-
-Function: journalExists
-Checks if it already exists in the passed data frame. Returns a key to the item if it exists, 0 otherwise and add it to the journalExists
-if a journal has the same ISSN， JournalIssue and Title, we treat then as the same journal
-```{r}
-journaleExists <- function(journalInfo) {
-  pk <- query(journalHashmap, journalInfo)
-  if (is.null(pk)) {
-    pk.journale <- nrow(Journals.df) + 1
-    insert(journalHashmap, journalInfo, pk.journale)
-    return (0)
-  } else {
-    return (pk)
-  }
-}
-```
-
-
+volume <- xpathSApply(journalIssue, "./Volume", xmlValue)
+    Issue <- xpathSApply(journalIssue, "./Issue", xmlValue)
+    
+    
 ```{r}
 numArticles <- xmlSize(root)
 for (m in 1 : numArticles) {
   article <- root[[m]]
-  journal <- article[[1]][[1]]
-  newJournals <- parseJournals(journal)
-  ISSN <- newJournals$ISSN
-  JournalIssue <- newJournals$JournalIssueId
-  Title <- newJournals$Title
-  journalInfo <- paste(c(ISSN, JournalIssue, Title), collapse = " ")
-  pk.journal <- journaleExists(journalInfo)
-  if (pk.journal == 0) {
-    # does not exist, so add
-    pk.journal <- nrow(Journals.df) + 1
-    Journals.df[pk.journal, 2:ncol(Journals.df)] <- newJournals[1,]
-    Journals.df[pk.journal, 1] <- pk.journal
-  }
-}
+  Journal <- article[[1]][[1]]
+  if (xmlName(Journal[[1]]) == "JournalIssue") {
+    journalIssue <- Journal[[1]]
 
+  } else {
+    journalIssue <- Journal[[2]]
+  }
+  
+  print(journalIssue)
+}
 ```
 
 
 
 
 
+volume
 
+```{r}
+article <- root[[1]]
+  Journal <- article[[1]][[1]]
+  JournalIssue <- Journal[[2]]
+    Issue <- xpathSApply(journalIssue, "./PubDate")
+    Issue
+```
 
-
-
-
-
-
+```{r}
+PubDates.df
+```
+```{r}
+JournalIssues.df
+```
 
 
