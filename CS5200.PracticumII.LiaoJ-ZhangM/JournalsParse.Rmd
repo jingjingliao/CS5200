@@ -55,7 +55,6 @@ Season.df <- data.frame (
 ```
 
 ```{r}
-
 pubDateHashmap <- hashmap()
 ```
 
@@ -168,7 +167,6 @@ parseJournals <- function(journal) {
 ```
 
 ```{r}
-library(r2r)
 journalHashmap <- hashmap()
 ```
 
@@ -209,6 +207,34 @@ for (m in 1 : numArticles) {
 }
 
 ```
+```{r}
+article <- root[[2]]
+  journal <- article[[1]][[1]]
+  journal
+```
+
+```{r}
+Journals.df
+```
+newJournals <- parseJournals(journal)
+  ISSN <- newJournals$ISSN
+  JournalIssue <- newJournals$JournalIssueId
+  Title <- newJournals$Title
+  journalInfo <- paste(c(ISSN, JournalIssue, Title), collapse = " ")
+  pk.journal <- journaleExists(journalInfo)
+  if (pk.journal == 0) {
+    # does not exist, so add
+    pk.journal <- nrow(Journals.df) + 1
+    Journals.df[pk.journal, 2:ncol(Journals.df)] <- newJournals[1,]
+    Journals.df[pk.journal, 1] <- pk.journal
+  }
+
+
+
+
+
+
+
 
 
 
